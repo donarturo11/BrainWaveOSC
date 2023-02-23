@@ -60,9 +60,9 @@ jobs:
            OF_DIR=of_${OF_VERSION}_${{ matrix.of-sys }}_release
            mkdir openFrameworks
            cd openFrameworks
-           wget ${OF_LINK_PREFIX}/${OF_ARCHIVE}
+           wget -q ${OF_LINK_PREFIX}/${OF_ARCHIVE}
            if [[ ${{matrix.of-ext}} == "zip" ]]; then
-               unzip ${OF_ARCHIVE}
+               unzip -q ${OF_ARCHIVE}
            fi
            rm ${OF_ARCHIVE}
            cd $OF_DIR
@@ -78,7 +78,7 @@ jobs:
           
     - name: Build
       run: |
-          make -f BrainWaveOSC/Makefile OF_ROOT={{env.OF_ROOT}}
+          make -f BrainWaveOSC/Makefile OF_ROOT=${{env.OF_ROOT}}
                      
 #    - name: Setup tmate session
 #      uses: mxschmitt/action-tmate@v3
