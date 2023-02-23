@@ -79,7 +79,7 @@ jobs:
           
     - name: Build
       run: |
-          make -f BrainWaveOSC/Makefile OF_ROOT=${{env.OF_ROOT}}
+          make -f ${PWD}/BrainWaveOSC/Makefile OF_ROOT=${{env.OF_ROOT}}
                      
 #    - name: Setup tmate session
 #      uses: mxschmitt/action-tmate@v3
