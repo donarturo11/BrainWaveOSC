@@ -54,13 +54,14 @@ jobs:
         
     - name: download and install openFrameworks
       run: |
-           OF_LINK_PREFIX=https://openframeworks.cc/ci_server/versions/nightly/
-           OF_VERSION=v20230223
-           OF_ARCHIVE=of_${OF_VERSION}_${{ matrix.of-sys }}_nightly.${{matrix.of-ext}}
-           OF_DIR=of_${OF_VERSION}_${{ matrix.of-sys }}_release
+           #OF_LINK_PREFIX=https://openframeworks.cc/ci_server/versions/nightly/
+           OF_LINK_PREFIX=https://github.com/openframeworks/openFrameworks/releases/download/
+           OF_VERSION=0.11.2
+           OF_ARCHIVE=of_v${OF_VERSION}_${{ matrix.of-sys }}_release.${{matrix.of-ext}}
+           OF_DIR=of_v${OF_VERSION}_${{ matrix.of-sys }}_release
            mkdir openFrameworks
            cd openFrameworks
-           wget -q ${OF_LINK_PREFIX}/${OF_ARCHIVE}
+           wget -q ${OF_LINK_PREFIX}/${OF_VERSION}/${OF_ARCHIVE}
            if [[ ${{matrix.of-ext}} == "zip" ]]; then
                unzip -q ${OF_ARCHIVE}
            fi
