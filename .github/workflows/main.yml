@@ -62,7 +62,7 @@ jobs:
            cd $HOME
            wget -q ${OF_LINK_PREFIX}/${OF_VERSION}/${OF_ARCHIVE}
            if [[ ${{matrix.of-ext}} == "zip" ]]; then
-               unzip ${OF_ARCHIVE}
+               unzip -q ${OF_ARCHIVE}
            fi
            rm ${OF_ARCHIVE}
            cd $OF_DIR
