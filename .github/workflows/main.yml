@@ -59,11 +59,10 @@ jobs:
            OF_VERSION=0.11.2
            OF_ARCHIVE=of_v${OF_VERSION}_${{ matrix.of-sys }}_release.${{matrix.of-ext}}
            OF_DIR=of_v${OF_VERSION}_${{ matrix.of-sys }}_release
-           mkdir openFrameworks
-           cd openFrameworks
+           cd $HOME
            wget -q ${OF_LINK_PREFIX}/${OF_VERSION}/${OF_ARCHIVE}
            if [[ ${{matrix.of-ext}} == "zip" ]]; then
-               unzip -q ${OF_ARCHIVE}
+               unzip ${OF_ARCHIVE}
            fi
            rm ${OF_ARCHIVE}
            cd $OF_DIR
