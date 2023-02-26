@@ -53,17 +53,22 @@ jobs:
         update: true
         install: |
             base base-devel mingw-w64-x86_64-toolchain p7zip zip unzip git
+    
+    - name: Configure environment
+      run: |
+           if [ ${{ runner.os }} == 'Windows' ]; then
+               echo WORKSPACE=$(cygpath -u ${{github.workspace}}) >> $GITHUB_ENV
+           else
+               echo WORKSPACE=${{github.workspace}} >> $GITHUB_ENV
+           fi
         
     - name: download and install openFrameworks
       run: |
            
            git clone https://github.com/openframeworks/openFrameworks
-           export OF_ROOT="${{github.workspace}}/openFrameworks"
-           if [ ${{runner.os }} == 'Windows' ]; then
-               echo "OF_ROOT=$(cygpath -u ${OF_ROOT})" >> $GITHUB_ENV
-           else
-               echo "OF_ROOT=${OF_ROOT}" >> $GITHUB_ENV
-           fi
+           
+           export OF_ROOT="${{env.WORKSPACE}}/openFrameworks"
+           echo "OF_ROOT=${OF_ROOT}" >> $GITHUB_ENV
            echo "::notice:: ${OF_ROOT}"
            cd ${OF_ROOT}
            echo "::notice:: ${PWD}"
