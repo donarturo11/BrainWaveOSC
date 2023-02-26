@@ -76,6 +76,7 @@ jobs:
            echo BUILD_DIR=${BUILD_DIR} >> $GITHUB_ENV
            
            cd $PROJECT_ROOT
+           echo "::notice:: ${PWD}"
            cp -R addons/* ${{ env.OF_ROOT }}/addons/
     
     - name: Prepare version
