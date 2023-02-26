@@ -57,7 +57,7 @@ jobs:
     - name: Configure environment
       run: |
            if [ ${{ runner.os }} == 'Windows' ]; then
-               echo WORKSPACE=$(cygpath -u ${{github.workspace}}) >> $GITHUB_ENV
+               echo WORKSPACE=$(cygpath -u "${{github.workspace}}") >> $GITHUB_ENV
            else
                echo WORKSPACE=${{github.workspace}} >> $GITHUB_ENV
            fi
