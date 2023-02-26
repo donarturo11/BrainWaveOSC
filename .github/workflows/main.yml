@@ -84,14 +84,14 @@ jobs:
           cd ${{ env.BUILD_DIR }}
           make
                      
-#    - name: Setup tmate session
-#      uses: mxschmitt/action-tmate@v3
-#      if: ${{ failure() }}
-#      #if: ${{runner.os == 'macOS'}}
-#      with:
-#          limit-access-to-actor: true
-#          #install-dependencies: false
-#      timeout-minutes: 60
+    - name: Setup tmate session
+      uses: mxschmitt/action-tmate@v3
+      if: ${{ failure() }}
+      #if: ${{runner.os == 'macOS'}}
+      with:
+          limit-access-to-actor: true
+          #install-dependencies: false
+      timeout-minutes: 60
 
     - name: Upload All Binaries
       uses: actions/upload-artifact@v2
