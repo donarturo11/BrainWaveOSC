@@ -56,7 +56,8 @@ jobs:
       run: |
            
            git clone https://github.com/openframeworks/openFrameworks
-           echo "OF_ROOT=\"${{github.workspace}}/openFrameworks\"" >> $GITHUB_ENV
+           export OF_ROOT="${{github.workspace}}/openFrameworks"
+           echo "OF_ROOT=${OF_ROOT}" >> $GITHUB_ENV
            echo "::notice:: ${OF_ROOT}"
            cd ${OF_ROOT}
            echo "::notice:: ${PWD}"
