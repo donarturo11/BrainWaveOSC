@@ -54,11 +54,11 @@ public:
 	void addEventListener(ListenerClass * listener){
         //void testApp::onGuiChanged(const void* sender, string &buttonLabel) {};
         ofAddListener(onChangedEvent,listener,&ListenerClass::onGUIChanged);
-    };
+    }
     template <class ListenerClass>
     void removeEventListener(ListenerClass * listener){
         ofRemoveListener(onChangedEvent,listener,&ListenerClass::onGUIChanged);
-    };
+    }
     
     // interaction    
     virtual void show(bool activateSingleItem = false);
