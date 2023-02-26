@@ -63,6 +63,11 @@ jobs:
            echo "::notice:: ${OF_ROOT}"
            cd ${OF_ROOT}
            echo "::notice:: ${PWD}"
+           if [ ${{runner.os }} == 'Windows' ]; then
+           bash ./scripts/${{ matrix.of-sys }}/install_dependencies.sh
+           elif [ ${{runner.os }} == 'Linux' ]; then
+           bash ./scripts/${{ matrix.of-sys }}/ubuntu/install_dependencies.sh
+           fi
            bash ./scripts/${{ matrix.of-sys }}/download_libs.sh
 
     - name: Checkout Repo
