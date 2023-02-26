@@ -58,7 +58,7 @@ jobs:
            git clone https://github.com/openframeworks/openFrameworks
            echo "OF_ROOT=${{github.workspace}}/openFrameworks" >> $GITHUB_ENV
            cd ${OF_ROOT}
-           find .
+           echo "::notice:: ${PWD}"
            bash ./scripts/${{ matrix.of-sys }}/download_libs.sh
 
     - name: Checkout Repo
