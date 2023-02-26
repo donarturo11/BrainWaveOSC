@@ -59,15 +59,19 @@ jobs:
            
            git clone https://github.com/openframeworks/openFrameworks
            export OF_ROOT="${{github.workspace}}/openFrameworks"
-           echo "OF_ROOT=${OF_ROOT}" >> $GITHUB_ENV
+           if [ ${{runner.os }} == 'Windows' ]; then
+               echo "OF_ROOT=$(cygpath -u ${OF_ROOT})" >> $GITHUB_ENV
+           else
+               echo "OF_ROOT=${OF_ROOT}" >> $GITHUB_ENV
+           fi
            echo "::notice:: ${OF_ROOT}"
            cd ${OF_ROOT}
            echo "::notice:: ${PWD}"
            if [ ${{runner.os }} == 'Windows' ]; then
-           bash ./scripts/${{ matrix.of-sys }}/install_dependencies.sh
+               bash ./scripts/${{ matrix.of-sys }}/install_dependencies.sh
            elif [ ${{runner.os }} == 'Linux' ]; then
-           sudo apt-get install -y libunwind-dev
-           sudo bash ./scripts/${{ matrix.of-sys }}/ubuntu/install_dependencies.sh
+               sudo apt-get install -y libunwind-dev
+               sudo bash ./scripts/${{ matrix.of-sys }}/ubuntu/install_dependencies.sh
            fi
            bash ./scripts/${{ matrix.of-sys }}/download_libs.sh
 
