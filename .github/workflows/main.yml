@@ -54,23 +54,24 @@ jobs:
         
     - name: download and install openFrameworks
       run: |
-           #OF_LINK_PREFIX=https://openframeworks.cc/ci_server/versions/nightly/
-           OF_LINK_PREFIX=https://github.com/openframeworks/openFrameworks/releases/download/
-           OF_VERSION=0.11.2
-           OF_ARCHIVE=of_v${OF_VERSION}_${{ matrix.of-sys }}_release.${{matrix.of-ext}}
-           OF_DIR=of_v${OF_VERSION}_${{ matrix.of-sys }}_release
-           cd $HOME
-           wget -q ${OF_LINK_PREFIX}/${OF_VERSION}/${OF_ARCHIVE}
-           if [[ ${{matrix.of-ext}} == "zip" ]]; then
-               unzip -q ${OF_ARCHIVE}
-           fi
-           rm ${OF_ARCHIVE}
-           cd $OF_DIR
-           echo "OF_ROOT=${PWD}" >> $GITHUB_ENV
-           cd ..
+           
+           git clone https://github.com/openframeworks/openFrameworks
+           echo "OF_ROOT=${PWD}/openFrameworks" >> $GITHUB_ENV
+           
 
     - name: Checkout Repo
       uses: actions/checkout@v2
+      path: openFrameworks/apps
+    
+    - name: Configure
+      run: |
+           PROJECT_ROOT=openFrameworks/BrainwaveOSC
+           BUILD_DIR=${PROJECT_ROOT}/BrainWaveOSC/
+           echo PROJECT_ROOT=${PROJECT_ROOT} >> $GITHUB_ENV
+           echo BUILD_DIR=${BUILD_DIR} >> $GITHUB_ENV
+           
+           cd $PROJECT_ROOT
+           cp -R addons/* ${{ env.OF_ROOT }}/addons/
     
     - name: Prepare version
       run: |
@@ -78,16 +79,17 @@ jobs:
           
     - name: Build
       run: |
-          make -f ${PWD}/BrainWaveOSC/Makefile OF_ROOT=${{env.OF_ROOT}}
+          cd ${{ env.BUILD_DIR }}
+          make
                      
-    - name: Setup tmate session
-      uses: mxschmitt/action-tmate@v3
-      if: ${{ failure() }}
-      #if: ${{runner.os == 'macOS'}}
-      with:
-          limit-access-to-actor: true
-          #install-dependencies: false
-      timeout-minutes: 60
+#    - name: Setup tmate session
+#      uses: mxschmitt/action-tmate@v3
+#      if: ${{ failure() }}
+#      #if: ${{runner.os == 'macOS'}}
+#      with:
+#          limit-access-to-actor: true
+#          #install-dependencies: false
+#      timeout-minutes: 60
 
     - name: Upload All Binaries
       uses: actions/upload-artifact@v2
