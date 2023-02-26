@@ -62,7 +62,8 @@ jobs:
 
     - name: Checkout Repo
       uses: actions/checkout@v2
-      path: openFrameworks/apps
+      with:
+           path: openFrameworks/apps
     
     - name: Configure
       run: |
