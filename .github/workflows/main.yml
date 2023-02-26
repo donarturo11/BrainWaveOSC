@@ -57,7 +57,7 @@ jobs:
            
            git clone https://github.com/openframeworks/openFrameworks
            echo "OF_ROOT=${{github.workspace}}/openFrameworks" >> $GITHUB_ENV
-           cd -v ${OF_ROOT}
+           cd ${OF_ROOT}
            find .
            bash ./scripts/${{ matrix.of-sys }}/download_libs.sh
 
