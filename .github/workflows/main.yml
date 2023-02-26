@@ -58,6 +58,7 @@ jobs:
             mingw-w64-x86_64-cairo
             mingw-w64-x86_64-cairomm
             mingw-w64-x86_64-glew
+            mingw-w64-x86_64-glfw
             p7zip
             zip
             unzip
@@ -88,7 +89,10 @@ jobs:
                sudo apt-get install -y libunwind-dev
                sudo bash ./scripts/${{ matrix.of-sys }}/ubuntu/install_dependencies.sh
            fi
-           bash ./scripts/${{ matrix.of-sys }}/download_libs.sh
+           if [ ${{runner.os }} != 'macOS' ]; then
+               bash ./scripts/${{ matrix.of-sys }}/download_libs.sh
+           fi
+           bash ./scripts/${{ matrix.of-sys }}/compileOF.sh
 
     - name: Checkout Repo
       uses: actions/checkout@v2
