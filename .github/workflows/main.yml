@@ -52,7 +52,7 @@ jobs:
         msystem: UCRT64
         update: true
         install: |
-            base base-devel mingw-w64-ucrt-x86_64-toolchain p7zip zip git
+            base base-devel mingw-w64-ucrt-x86_64-toolchain p7zip zip unzip git
         
     - name: download and install openFrameworks
       run: |
