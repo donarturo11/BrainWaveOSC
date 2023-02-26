@@ -17,7 +17,7 @@ jobs:
        include:
         #- { os: windows-latest, flags: "", shell: 'msys2 {0}', deps-prefix: "/opt/deps", aqt-os: "windows", aqt-arch: "win64_mingw", aqt-prefix: "/opt/Qt", aqt-module: "mingw_64" }
         #- { os: ubuntu-latest, shell: 'bash' }
-        - { os: macos-latest, shell: 'bash', of-ext: 'zip', of-sys: 'osx' }
+        - { os: macos-latest, shell: 'bash', of-sys: 'osx' }
     runs-on: ${{matrix.os}}
     defaults:
       run:
@@ -57,7 +57,8 @@ jobs:
            
            git clone https://github.com/openframeworks/openFrameworks
            echo "OF_ROOT=${PWD}/openFrameworks" >> $GITHUB_ENV
-           
+           cd ${OF_ROOT}
+           bash ./scripts/${{ matrix.of-sys }}/download_libs.sh
 
     - name: Checkout Repo
       uses: actions/checkout@v2
