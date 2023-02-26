@@ -49,10 +49,10 @@ jobs:
       name: Install MinGW
       uses: msys2/setup-msys2@v2
       with:
-        msystem: UCRT64
+        msystem: MINGW64
         update: true
         install: |
-            base base-devel mingw-w64-ucrt-x86_64-toolchain p7zip zip unzip git
+            base base-devel mingw-w64-x86_64-toolchain p7zip zip unzip git
         
     - name: download and install openFrameworks
       run: |
