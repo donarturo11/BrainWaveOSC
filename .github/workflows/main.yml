@@ -52,7 +52,7 @@ jobs:
         msystem: MINGW64
         update: true
         install: |
-            base base-devel mingw-w64-x86_64-toolchain mingw-w64-x86_64-cairo p7zip zip unzip git
+            base base-devel mingw-w64-x86_64-toolchain mingw-w64-x86_64-cairo mingw-w64-x86_64-glew p7zip zip unzip git
     
     - name: Configure environment
       run: |
