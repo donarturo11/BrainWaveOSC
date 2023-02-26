@@ -15,8 +15,8 @@ jobs:
     strategy:
       matrix:
        include:
-        #- { os: windows-latest, flags: "", shell: 'msys2 {0}', deps-prefix: "/opt/deps", aqt-os: "windows", aqt-arch: "win64_mingw", aqt-prefix: "/opt/Qt", aqt-module: "mingw_64" }
-        #- { os: ubuntu-latest, shell: 'bash' }
+        - { os: windows-latest, flags: "", shell: 'msys2 {0}', of-sys: 'msys2' }
+        - { os: ubuntu-latest, shell: 'bash', of-sys: 'linux' }
         - { os: macos-latest, shell: 'bash', of-sys: 'osx' }
     runs-on: ${{matrix.os}}
     defaults:
