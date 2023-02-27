@@ -51,7 +51,7 @@ jobs:
       with:
         msystem: UCRT64
         update: true
-        install: base base-devel p7zip zip unzip git
+        install: base base-devel p7zip zip unzip git pkgutil
     
     - name: Install Linux Dependencies
       if: ${{runner.os == 'Linux'}}
