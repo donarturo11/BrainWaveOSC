@@ -92,12 +92,12 @@ jobs:
     
     - name: Configure
       run: |
-           PROJECT_ROOT=${{ env.OF_ROOT }}/apps/BrainwaveOSC
-           BUILD_DIR=${PROJECT_ROOT}/BrainWaveOSC/
-           echo PROJECT_ROOT=${PROJECT_ROOT} >> $GITHUB_ENV
+           PROJECT_DIR=${{ env.OF_ROOT }}/apps/BrainwaveOSC
+           BUILD_DIR=${PROJECT_DIR}/BrainWaveOSC/
+           echo PROJECT_DIR=${PROJECT_DIR} >> $GITHUB_ENV
            echo BUILD_DIR=${BUILD_DIR} >> $GITHUB_ENV
            
-           cd $PROJECT_ROOT
+           cd $PROJECT_DIR
            echo "::notice:: ${PWD}"
            cp -R addons/* ${{ env.OF_ROOT }}/addons/
     
