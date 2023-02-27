@@ -64,7 +64,8 @@ jobs:
       run: |
            echo "::notice:: MINGW_PACKAGE_PREFIX=${MINGW_PACKAGE_PREFIX}"
            pacman -S --noconfirm \
-               ${MINGW_PACKAGE_PREFIX}-toolchain
+               ${MINGW_PACKAGE_PREFIX}-toolchain \
+               ${MINGW_PACKAGE_PREFIX}-gcc-objc
 
     - name: Configure environment
       run: |
