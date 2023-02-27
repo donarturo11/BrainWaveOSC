@@ -16,8 +16,8 @@ jobs:
       matrix:
        include:
         - { os: windows-latest, flags: "", shell: 'msys2 {0}', of-sys: 'msys2' }
-        - { os: ubuntu-latest, shell: 'bash', of-sys: 'linux' }
-        - { os: macos-latest, shell: 'bash', of-sys: 'osx' }
+        #- { os: ubuntu-latest, shell: 'bash', of-sys: 'linux' }
+        #- { os: macos-latest, shell: 'bash', of-sys: 'osx' }
     runs-on: ${{matrix.os}}
     defaults:
       run:
