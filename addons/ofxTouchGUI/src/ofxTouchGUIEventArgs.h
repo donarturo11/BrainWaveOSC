@@ -9,10 +9,10 @@ class ofxTouchGUIBase;
 class ofxTouchGUIEventArgs : public ofEventArgs {
 public:
     
-    ofxTouchGUIEventArgs() {};
+    ofxTouchGUIEventArgs() {}
     ofxTouchGUIEventArgs(ofxTouchGUIBase *tgb) {
         target = tgb;
-    };
+    }
     
     ofxTouchGUIBase* target;
 };
