@@ -70,7 +70,7 @@ jobs:
            echo "OF_ROOT=${OF_ROOT}" >> $GITHUB_ENV
            echo "::notice:: ${OF_ROOT}"
            cd ${OF_ROOT}
-           curl https://gist.githubusercontent.com/donarturo11/c32cb880d25eb06f41b99863903072fb/raw/48ddfa9f067e16c1c8f6ef707edd424152f51ad4/0000-fix-of-event.patch | patch -p1
+           # curl https://gist.githubusercontent.com/donarturo11/c32cb880d25eb06f41b99863903072fb/raw/48ddfa9f067e16c1c8f6ef707edd424152f51ad4/0000-fix-of-event.patch | patch -p1
            echo "::notice:: ${PWD}"
            if [ ${{runner.os }} == 'Windows' ]; then
                echo "::notice:: Mingw Package prefix: ${MINGW_PACKAGE_PREFIX}"
@@ -110,14 +110,14 @@ jobs:
           cd ${{ env.BUILD_DIR }}
           make
                      
-#    - name: Setup tmate session
-#      uses: mxschmitt/action-tmate@v3
-#      if: ${{ failure() }}
-#      #if: ${{runner.os == 'macOS'}}
-#      with:
-#          limit-access-to-actor: true
-#          #install-dependencies: false
-#      timeout-minutes: 60
+    - name: Setup tmate session
+      uses: mxschmitt/action-tmate@v3
+      if: ${{ failure() }}
+      #if: ${{runner.os == 'macOS'}}
+      with:
+          limit-access-to-actor: true
+          #install-dependencies: false
+      timeout-minutes: 60
 
     - name: Upload All Binaries
       uses: actions/upload-artifact@v2
