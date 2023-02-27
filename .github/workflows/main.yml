@@ -15,9 +15,9 @@ jobs:
     strategy:
       matrix:
        include:
-        - { os: windows-latest, flags: "", shell: 'msys2 {0}', of-sys: 'msys2' }
-        - { os: ubuntu-latest, shell: 'bash', of-sys: 'linux' }
-        - { os: macos-latest, shell: 'bash', of-sys: 'osx' }
+        - { os: windows-2019, flags: "", shell: 'msys2 {0}', of-sys: 'msys2' }
+        - { os: ubuntu-20.04, shell: 'bash', of-sys: 'linux' }
+        - { os: macos-11, shell: 'bash', of-sys: 'osx' }
     runs-on: ${{matrix.os}}
     defaults:
       run:
