@@ -53,6 +53,12 @@ jobs:
         update: true
         install: base base-devel p7zip zip unzip git
     
+    - if: ${{runner.os == 'Linux'}}
+      name: Update Linux
+      run: |
+          sudo apt-get update
+          sudo apt-get install --reinstall build-essential
+
     - name: Configure environment
       run: |
            if [ ${{ runner.os }} == 'Windows' ]; then
