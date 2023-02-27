@@ -62,7 +62,7 @@ jobs:
     - name: Install MinGW Dependencies
       if: ${{runner.os == 'Windows'}}
       env:
-          MINGW_PACKAGE_PREFIX: 'mingw-w64-ucrt-x86_64'
+           MINGW_PACKAGE_PREFIX: 'mingw-w64-ucrt-x86_64'
       run: |
            pacman -S --noconfirm \ 
                ${MINGW_PACKAGE_PREFIX}-gcc-objc \
@@ -80,7 +80,6 @@ jobs:
       run: |
            
            git clone https://github.com/openframeworks/openFrameworks
-           
            export OF_ROOT="${{env.WORKSPACE}}/openFrameworks"
            echo "OF_ROOT=${OF_ROOT}" >> $GITHUB_ENV
            echo "::notice:: ${OF_ROOT}"
