@@ -80,9 +80,9 @@ jobs:
                sudo bash ./scripts/${{ matrix.of-sys }}/ubuntu/install_dependencies.sh
            fi
            bash ./scripts/${{ matrix.of-sys }}/download_libs.sh
-           #if [ ${{runner.os }} != 'macOS' ]; then
-           #    bash ./scripts/${{ matrix.of-sys }}/compileOF.sh    
-           #fi
+           if [ ${{runner.os }} != 'macOS' ]; then
+               bash ./scripts/${{ matrix.of-sys }}/compileOF.sh    
+           fi
            
 
     - name: Checkout Repo
