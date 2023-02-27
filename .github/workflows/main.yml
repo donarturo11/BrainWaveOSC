@@ -56,8 +56,9 @@ jobs:
     - if: ${{runner.os == 'Linux'}}
       name: Update Linux
       run: |
-          sudo apt-get update
-          sudo apt-get install --reinstall build-essential
+          sudo apt-get update -y
+          sudo apt-get upgrade -y
+          sudo apt-get install -y --reinstall build-essential
 
     - name: Configure environment
       run: |
