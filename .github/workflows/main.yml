@@ -53,6 +53,12 @@ jobs:
         update: true
         install: base base-devel p7zip zip unzip git
     
+    - name: Install Linux Dependencies
+      if: ${{runner.os == 'Linux'}}
+      run: |
+           sudo apt-get update
+           sudo apt-get install -y gobjc++
+
     - name: Configure environment
       run: |
            if [ ${{ runner.os }} == 'Windows' ]; then
