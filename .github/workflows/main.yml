@@ -63,7 +63,7 @@ jobs:
       if: ${{runner.os == 'Windows'}}
       run: |
            echo "::notice:: MINGW_PACKAGE_PREFIX=${MINGW_PACKAGE_PREFIX}"
-           pacman -S --noconfirm \ 
+           pacman -S --noconfirm \
                ${MINGW_PACKAGE_PREFIX}-toolchain
 
     - name: Configure environment
