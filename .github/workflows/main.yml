@@ -51,7 +51,7 @@ jobs:
       with:
         msystem: UCRT64
         update: true
-        install: base base-devel p7zip zip unzip git pkgutil
+        install: base base-devel p7zip zip unzip git
     
     - name: Install Linux Dependencies
       if: ${{runner.os == 'Linux'}}
@@ -62,7 +62,9 @@ jobs:
     - name: Install MinGW Dependencies
       if: ${{runner.os == 'Windows'}}
       run: |
-           pacman -S --noconfirm ${MINGW_PACKAGE_PREFIX}-gcc-objc
+           pacman -S --noconfirm \ 
+               ${MINGW_PACKAGE_PREFIX}-gcc-objc \
+               ${MINGW_PACKAGE_PREFIX}-gcc-toolchain
 
     - name: Configure environment
       run: |
