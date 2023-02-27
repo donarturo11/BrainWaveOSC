@@ -61,12 +61,9 @@ jobs:
 
     - name: Install MinGW Dependencies
       if: ${{runner.os == 'Windows'}}
-      env:
-           MINGW_PACKAGE_PREFIX: 'mingw-w64-ucrt-x86_64'
       run: |
            echo "::notice:: MINGW_PACKAGE_PREFIX=${MINGW_PACKAGE_PREFIX}"
            pacman -S --noconfirm \ 
-               ${MINGW_PACKAGE_PREFIX}-gcc-objc \
                ${MINGW_PACKAGE_PREFIX}-toolchain
 
     - name: Configure environment
