@@ -83,8 +83,8 @@ jobs:
            echo "OF_ROOT=${OF_ROOT}" >> $GITHUB_ENV
            echo "::notice:: ${OF_ROOT}"
            cd ${OF_ROOT}
-           GIST="https://gist.githubusercontent.com/donarturo11/0bc7afc5caf1b5cc005d9cbeb496afc5/raw/0088d0b41e3265ba663a0327e868afdab49ca612"
-           curl ${GIST}/0000-add-support-for-more-mingw-environments.patch | patch -p0
+           PATCH="https://gist.githubusercontent.com/donarturo11/0bc7afc5caf1b5cc005d9cbeb496afc5/raw/44337c784e3158627281376b6dec36fb18f22006/0000-add-support-for-more-mingw-environments.patch"
+           curl ${PATCH} | patch -p0
            echo "::notice:: ${PWD}"
            if [ ${{runner.os }} == 'Windows' ]; then
                echo "::notice:: Mingw Package prefix: ${MINGW_PACKAGE_PREFIX}"
