@@ -111,6 +111,7 @@ jobs:
            BUILD_DIR=${PROJECT_DIR}/BrainWaveOSC/
            echo PROJECT_DIR=${PROJECT_DIR} >> $GITHUB_ENV
            echo BUILD_DIR=${BUILD_DIR} >> $GITHUB_ENV
+           echo PROJECT_CFLAGS="-Wfatal-errors -Wno-pragmas -Wduplicate-decl-specifier" >> $GITHUB_ENV
            
            cd $PROJECT_DIR
            echo "::notice:: ${PWD}"
