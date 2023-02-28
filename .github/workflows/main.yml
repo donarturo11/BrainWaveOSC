@@ -15,9 +15,10 @@ jobs:
     strategy:
       matrix:
        include:
-        - { os: windows-latest, flags: "", shell: 'msys2 {0}', of-sys: 'msys2' }
-        #- { os: ubuntu-latest, shell: 'bash', of-sys: 'linux' }
-        #- { os: macos-latest, shell: 'bash', of-sys: 'osx' }
+        #- { name: 'windows-mingw', os: windows-latest, flags: "", shell: 'msys2 {0}', of-sys: 'msys2' }
+        - { name: 'windows-msvc', os: windows-latest, flags: "", shell: 'msys2 {0}', of-sys: 'vs' }
+        #- { name: 'linux', os: ubuntu-latest, shell: 'bash', of-sys: 'linux' }
+        #- { name: 'macos', os: macos-latest, shell: 'bash', of-sys: 'osx' }
     runs-on: ${{matrix.os}}
     defaults:
       run:
@@ -60,7 +61,7 @@ jobs:
            sudo apt-get install -y gobjc++
 
     - name: Install MinGW Dependencies
-      if: ${{runner.os == 'Windows'}}
+      if: ${{matrix.of-sys == 'msys'}}
       run: |
            echo "::notice:: MINGW_PACKAGE_PREFIX=${MINGW_PACKAGE_PREFIX}"
            pacman -S --noconfirm \
@@ -84,18 +85,18 @@ jobs:
            echo "OF_ROOT=${OF_ROOT}" >> $GITHUB_ENV
            echo "::notice:: ${OF_ROOT}"
            cd ${OF_ROOT}
-           PATCH="https://gist.githubusercontent.com/donarturo11/0bc7afc5caf1b5cc005d9cbeb496afc5/raw/e830887d0f39f516ce8227f3c694e17e6e366f7f/0000-add-support-for-other-mingw-environments.patch"
-           curl ${PATCH} | patch -p0
+           # PATCH="https://gist.githubusercontent.com/donarturo11/0bc7afc5caf1b5cc005d9cbeb496afc5/raw/e830887d0f39f516ce8227f3c694e17e6e366f7f/0000-add-support-for-other-mingw-environments.patch"
+           # curl ${PATCH} | patch -p0
            echo "::notice:: ${PWD}"
            if [ ${{runner.os }} == 'Windows' ]; then
                echo "::notice:: Mingw Package prefix: ${MINGW_PACKAGE_PREFIX}"
                bash ./scripts/${{ matrix.of-sys }}/install_dependencies.sh --noconfirm
-           elif [ ${{runner.os }} == 'Linux' ]; then
+           elif [ ${{ runner.os }} == 'Linux' ]; then
                sudo apt-get install -y libunwind-dev
                sudo bash ./scripts/${{ matrix.of-sys }}/ubuntu/install_dependencies.sh
            fi
            bash ./scripts/${{ matrix.of-sys }}/download_libs.sh
-           if [ ${{runner.os }} != 'macOS' ]; then
+           if [ ${{runner.os }} != 'macOS' || {{ matrix.of-sys }} != 'vs' ]; then
                bash ./scripts/${{ matrix.of-sys }}/compileOF.sh    
            fi
            
@@ -111,29 +112,74 @@ jobs:
            BUILD_DIR=${PROJECT_DIR}/BrainWaveOSC/
            echo PROJECT_DIR=${PROJECT_DIR} >> $GITHUB_ENV
            echo BUILD_DIR=${BUILD_DIR} >> $GITHUB_ENV
-           echo PROJECT_CFLAGS="-Wfatal-errors -Wno-pragmas -Wduplicate-decl-specifier" >> $GITHUB_ENV
-           
+                      
            cd $PROJECT_DIR
            echo "::notice:: ${PWD}"
            cp -R addons/* ${{ env.OF_ROOT }}/addons/
+    
+    - name: Setup MSBuild
+      if: ${{ matrix.of-sys == 'vs' }}
+      uses: microsoft/setup-msbuild@v1.1
     
     - name: Prepare version
       run: |
           echo GITREV=$(git rev-parse --short HEAD) >> $GITHUB_ENV
           
-    - name: Build
+    - name: Build (UNIX/Msys)
+      if: ${{ matrix.of-sys != 'vs' }}
       run: |
           cd ${{ env.BUILD_DIR }}
           make
+    
+    - name: Build (MSVC)
+      if: ${{ matrix.of-sys == 'vs' }}
+      run: |
+          msbuild ${BUILD_DIR}/BrainwaveOSC.vcxproj
+    
+    - name: Prepare Packages names
+      run: |
+          PACKAGE_NAME=${{github.workspace}}/${{env.pkgname}}-${{matrix.name}}
+          echo "PACKAGE_NAME=$PACKAGE_NAME" >> ${GITHUB_ENV}
+    
+    - name: Prepare Artifacts directory
+      run: |
+          DESTDIR=${{github.workspace}}/${{env.pkgname}}-${{matrix.name}}
+          echo "DESTDIR=$DESTDIR" >> $GITHUB_ENV
+          mkdir $DESTDIR || echo "::warning:: $DESTDIR already exists"
+    
+    - name: Prepare binaries to upload (windows)
+      run: |
+          cd ${BUILD_DIR}/bin
+          7z a -r ${DESTDIR}/${PACKAGE_NAME} *
+      
+    - name: Prepare binaries to upload (Linux)
+      run: |
+          cd ${BUILD_DIR}/
+          mv bin ${PACKAGE_NAME}
+          tar -vczf $DESTDIR/${PACKAGE_NAME} ${PACKAGE_NAME}
+    
+    - name: Prepare binaries to upload (MacOS)
+      run: |
+          hdiutil create -size 700m -fs HFS+ -volname "${PACKAGE_NAME}" temp.dmg
+          hdiutil attach temp.dmg
+          cd ${BUILD_DIR}/bin
+          codesign --verbose --strict --continue --timestamp --force --deep -s- *.app
+          cp -av * /Volumes/${PACKAGE_NAME}
+          ln -s /Applications/ /Volumes/${PACKAGE_NAME}/Applications
+          hdiutil detach /Volumes/${PACKAGE_NAME}/Applications
+          hdiutil convert temp.dmg -format UDBZ \
+                    -o ${DESTDIR}/${PACKAGE_NAME}.dmg
+          shasum -a 256 ${DESTDIR}/${PACKAGE_NAME}.dmg
+          
                      
-    - name: Setup tmate session
-      uses: mxschmitt/action-tmate@v3
-      if: ${{ failure() }}
-      #if: ${{runner.os == 'macOS'}}
-      with:
-          limit-access-to-actor: true
-          #install-dependencies: false
-      timeout-minutes: 60
+#    - name: Setup tmate session
+#      uses: mxschmitt/action-tmate@v3
+#      if: ${{ failure() }}
+#      #if: ${{runner.os == 'macOS'}}
+#      with:
+#          limit-access-to-actor: true
+#          #install-dependencies: false
+#      timeout-minutes: 60
 
     - name: Upload All Binaries
       uses: actions/upload-artifact@v2
@@ -158,20 +204,26 @@ jobs:
       - name: Get macOS Binary
         uses: actions/download-artifact@v2
         with:
-          name: ${{github.workspace}}/${{env.pkgname}}-macOS
-          path: ${{github.workspace}}/${{env.pkgname}}-macOS
+          name: ${{env.pkgname}}-macos
+          path: ${{github.workspace}}/${{env.pkgname}}-macos
 
       - name: Get Linux Binary
         uses: actions/download-artifact@v2
         with:
-          name: ${{github.workspace}}/${{env.pkgname}}-Linux
-          path: ${{github.workspace}}/${{env.pkgname}}-Linux
+          name: ${{env.pkgname}}-linux
+          path: ${{github.workspace}}/${{env.pkgname}}-linux
           
-      - name: Get Windows Binary
+      - name: Get Windows Binary (mingw)
         uses: actions/download-artifact@v2
         with:
-          name: ${{github.workspace}}/${{env.pkgname}}-Windows
-          path: ${{github.workspace}}/${{env.pkgname}}-Windows
+          name: ${{env.pkgname}}-windows-mingw
+          path: ${{github.workspace}}/${{env.pkgname}}-windows-mingw
+          
+      - name: Get Windows Binary (msvc)
+        uses: actions/download-artifact@v2
+        with:
+          name: ${{env.pkgname}}-windows-msvc
+          path: ${{github.workspace}}/${{env.pkgname}}-windows-msvc
 
       - if: github.event_name == 'push' # this is a snapshot build. create a release and upload binaries
         name: Create Snapshot Release
@@ -182,9 +234,10 @@ jobs:
           generate_release_notes: true
           prerelease: true
           files: |
-            ${{github.workspace}}/${{env.pkgname}}-Windows/*
-            ${{github.workspace}}/${{env.pkgname}}-Linux/*
-            ${{github.workspace}}/${{env.pkgname}}-macOS/*
+            ${{github.workspace}}/${{env.pkgname}}-msvc/*
+            ${{github.workspace}}/${{env.pkgname}}-mingw/*
+            ${{github.workspace}}/${{env.pkgname}}-linux/*
+            ${{github.workspace}}/${{env.pkgname}}-macos/*
 
       - if: github.event_name == 'create' && startsWith(github.ref, 'refs/tags/v') # this is a versioned build. check if release already exists
         name: Find Existing Release
@@ -214,19 +267,30 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}
         with:
           upload_url: ${{ steps.find_release.outputs.upload_url }}
-          asset_path: ${{github.workspace}}/${{env.pkgname}}-Linux
+          asset_path: ${{github.workspace}}/${{env.pkgname}}-linux
           asset_name: ${{env.pkgname}}-linux-x86_64
           asset_content_type: application/octet-stream
 
       - if: github.event_name == 'create' && startsWith(github.ref, 'refs/tags/v') && steps.find_release.outputs.id != 0 # release exists - upload Windows binary
-        name: Update Tagged Release (Windows)
+        name: Update Tagged Release (Windows msvc)
         uses: actions/upload-release-asset@v1.0.2
         env:
           GITHUB_TOKEN: ${{ github.token }}
         with:
           upload_url: ${{ steps.find_release.outputs.upload_url }}
-          asset_path: ${{github.workspace}}/${{env.pkgname}}-Windows
-          asset_name: ${{env.pkgname}}-win-x86_64
+          asset_path: ${{github.workspace}}/${{env.pkgname}}-windows-msvc
+          asset_name: ${{env.pkgname}}-win-msvc-x86_64
+          asset_content_type: application/octet-stream
+      
+      - if: github.event_name == 'create' && startsWith(github.ref, 'refs/tags/v') && steps.find_release.outputs.id != 0 # release exists - upload Windows binary
+        name: Update Tagged Release (Windows mingw)
+        uses: actions/upload-release-asset@v1.0.2
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        with:
+          upload_url: ${{ steps.find_release.outputs.upload_url }}
+          asset_path: ${{github.workspace}}/${{env.pkgname}}-windows-mingw
+          asset_name: ${{env.pkgname}}-win-mingw-x86_64
           asset_content_type: application/octet-stream
 
       - if: github.event_name == 'create' && startsWith(github.ref, 'refs/tags/v') && steps.find_release.outputs.id == 0 # otherwise release does not exist, create one and upload binaries
@@ -238,6 +302,7 @@ jobs:
           generate_release_notes: true
           prerelease: false
           files: |
-            ${{github.workspace}}/${{env.pkgname}}-macOS*
-            ${{github.workspace}}/${{env.pkgname}}-Windows*
-            ${{github.workspace}}/${{env.pkgname}}-Linux*
+            ${{github.workspace}}/${{env.pkgname}}-macos*
+            ${{github.workspace}}/${{env.pkgname}}-windows-msvc*
+            ${{github.workspace}}/${{env.pkgname}}-windows-mingw*
+            ${{github.workspace}}/${{env.pkgname}}-linux*
