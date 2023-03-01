@@ -88,7 +88,7 @@ jobs:
            # PATCH="https://gist.githubusercontent.com/donarturo11/0bc7afc5caf1b5cc005d9cbeb496afc5/raw/e830887d0f39f516ce8227f3c694e17e6e366f7f/0000-add-support-for-other-mingw-environments.patch"
            # curl ${PATCH} | patch -p0
            echo "::notice:: ${PWD}"
-           if [ ${{ matrix.of-sys }} != 'vs' ]; then
+           if [ ${{ matrix.of-sys }} != 'vs' ] && [ ${{ runner.os }} == 'Windows' ] ; then
                echo "::notice:: Mingw Package prefix: ${MINGW_PACKAGE_PREFIX}"
                bash ./scripts/${{ matrix.of-sys }}/install_dependencies.sh --noconfirm
            elif [ ${{ runner.os }} == 'Linux' ]; then
