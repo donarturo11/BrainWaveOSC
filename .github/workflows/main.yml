@@ -19,6 +19,7 @@ jobs:
         - { name: 'windows-msvc', os: windows-latest, flags: "", shell: 'msys2 {0}', of-sys: 'vs' }
         - { name: 'linux', os: ubuntu-latest, shell: 'bash', of-sys: 'linux' }
         - { name: 'macos', os: macos-latest, shell: 'bash', of-sys: 'osx' }
+        - { name: 'macos-legacy', os: macos-latest, shell: 'bash', of-sys: 'osx' }
     runs-on: ${{matrix.os}}
     defaults:
       run:
@@ -134,12 +135,12 @@ jobs:
       if: ${{ matrix.of-sys != 'vs' }}
       run: |
           cd ${{ env.BUILD_DIR }}
-          if [ ${{ matrix.of-sys }} == 'osx' ]; then
-              export PLATFORM_CFLAGS=" -arch x86_64 -arch arm64 "
-              export PROJECT_CFLAGS=" -arch x86_64 -arch arm64 "
+          if [ ${{ matrix.name }} == 'macos' ]; then
+              export CXX="clang" 
+              export CC="clang" 
+              export PLATFORM_OPTIMIZATION_CFLAGS_RELEASE=" -arch x86_64 -arch arm64 "
               export MACOSX_DEPLOYMENT_TARGET=11
-              export MAC_OS_MIN_VERSION = 11.0
-              export OSX_ARCHITECTURES="x86_64;arm64"
+              export MAC_OS_MIN_VERSION=11.0
           fi
           make -j${NJOBS}
         
@@ -223,6 +224,12 @@ jobs:
         with:
           name: ${{env.pkgname}}-macos
           path: ${{github.workspace}}/${{env.pkgname}}-macos
+      
+      - name: Get macOS Binary (legacy)
+        uses: actions/download-artifact@v2
+        with:
+          name: ${{env.pkgname}}-macos-legacy
+          path: ${{github.workspace}}/${{env.pkgname}}-macos-legacy
 
       - name: Get Linux Binary
         uses: actions/download-artifact@v2
@@ -255,6 +262,7 @@ jobs:
             ${{github.workspace}}/${{env.pkgname}}-mingw/*
             ${{github.workspace}}/${{env.pkgname}}-linux/*
             ${{github.workspace}}/${{env.pkgname}}-macos/*
+            ${{github.workspace}}/${{env.pkgname}}-macos-legacy/*
 
       - if: github.event_name == 'create' && startsWith(github.ref, 'refs/tags/v') # this is a versioned build. check if release already exists
         name: Find Existing Release
