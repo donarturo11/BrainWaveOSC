@@ -150,7 +150,7 @@ jobs:
       shell: pwsh
       env: 
           VCXPROJ: ${{ env.BUILD_DIR_WIN }}\BrainwaveOSC.vcxproj
-      run: msbuild $VCXPROJ
+      run: msbuild "$VCXPROJ"
     
     - name: Prepare Packages names
       run: |
