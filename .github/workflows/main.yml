@@ -17,8 +17,8 @@ jobs:
        include:
         #- { name: 'windows-mingw', os: windows-latest, flags: "", shell: 'msys2 {0}', of-sys: 'msys2' }
         - { name: 'windows-msvc', os: windows-latest, flags: "", shell: 'msys2 {0}', of-sys: 'vs' }
-        #- { name: 'linux', os: ubuntu-latest, shell: 'bash', of-sys: 'linux' }
-        #- { name: 'macos', os: macos-latest, shell: 'bash', of-sys: 'osx' }
+        - { name: 'linux', os: ubuntu-latest, shell: 'bash', of-sys: 'linux' }
+        - { name: 'macos', os: macos-latest, shell: 'bash', of-sys: 'osx' }
     runs-on: ${{matrix.os}}
     defaults:
       run:
@@ -192,8 +192,8 @@ jobs:
     - name: Upload All Binaries
       uses: actions/upload-artifact@v2
       with:
-        name: ${{env.pkgname}}-${{runner.os}}
-        path: ${{github.workspace}}/${{env.pkgname}}-${{runner.os}}
+        name: ${{ env.PACKAGE_NAME }}
+        path: ${{ env.WORKSPACE }}/${{ env.PACKAGE_NAME }}
                 
     - name: Print variables
       run: |
