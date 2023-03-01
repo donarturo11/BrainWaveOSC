@@ -175,6 +175,7 @@ jobs:
           cp -av * /Volumes/${PACKAGE_NAME}
           ln -s /Applications/ /Volumes/${PACKAGE_NAME}/Applications
           hdiutil detach /Volumes/${PACKAGE_NAME}
+          mkdir ${DESTDIR} || echo "::warning:: ${DESTDIR} already exists"
           hdiutil convert temp.dmg -format UDBZ \
                     -o ${DESTDIR}/${PACKAGE_NAME}.dmg
           shasum -a 256 ${DESTDIR}/${PACKAGE_NAME}.dmg
