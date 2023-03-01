@@ -139,7 +139,8 @@ jobs:
           echo "::notice::PATH=$PATH"
           echo "::notice::vswhere-path=${{ env.vswhere-path }}"
           MSBUILD_PATH=$(cygpath -u "$(vswhere -property installationPath -latest)"/current/bin/)
-          echo "${MSBUILD_PATH}" >> $GITHUB_PATH
+          PATH=${PATH}:"${MSBUILD_PATH}"
+          echo "PATH=${PATH}" >> $GITHUB_ENV
     
     - name: Build (MSVC)
       if: ${{ matrix.of-sys == 'vs' }}
