@@ -99,7 +99,9 @@ jobs:
            if [ ${{runner.os }} != 'macOS' ] && [ {{ matrix.of-sys }} != 'vs' ]; then
                bash ./scripts/${{ matrix.of-sys }}/compileOF.sh    
            fi
-           
+           if [ ${{ matrix.of-sys }} == 'vs' ]; then
+               bash ./scripts/${{ matrix.of-sys }}/setupCommandLine.cmd
+           fi
 
     - name: Checkout Repo
       uses: actions/checkout@v2
@@ -148,9 +150,9 @@ jobs:
     - name: Build (MSVC)
       if: ${{ matrix.of-sys == 'vs' }}
       shell: pwsh
-      env: 
-          VCXPROJ: ${{ env.BUILD_DIR_WIN }}\BrainwaveOSC.vcxproj
-      run: msbuild "$VCXPROJ"
+      run: |
+          cd $env:BUILD_DIR_WIN
+          msbuild
     
     - name: Prepare Packages names
       run: |
