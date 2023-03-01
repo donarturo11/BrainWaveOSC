@@ -112,7 +112,10 @@ jobs:
            BUILD_DIR=${PROJECT_DIR}/BrainWaveOSC/
            echo PROJECT_DIR=${PROJECT_DIR} >> $GITHUB_ENV
            echo BUILD_DIR=${BUILD_DIR} >> $GITHUB_ENV
-                      
+           if [ ${{ matrix.of-sys }} == 'vs' ]; then
+               export BUILD_DIR_WIN=$(cygpath -w "${BUILD_DIR}")
+               echo "BUILD_DIR_WIN=${BUILD_DIR_WIN}" >> $GITHUB_ENV
+           fi
            cd $PROJECT_DIR
            echo "::notice:: ${PWD}"
            cp -R addons/* ${{ env.OF_ROOT }}/addons/
@@ -144,9 +147,10 @@ jobs:
     
     - name: Build (MSVC)
       if: ${{ matrix.of-sys == 'vs' }}
-      run: |
-          export BUILD_DIR_WIN=$(cygpath -w "${BUILD_DIR}")
-          pwsh -Command msbuild ${{env.BUILD_DIR_WIN}}\BrainwaveOSC.vcxproj
+      shell: pwsh
+      env: 
+          VCXPROJ: ${{ env.BUILD_DIR_WIN }}\BrainwaveOSC.vcxproj
+      run: msbuild $VCXPROJ
     
     - name: Prepare Packages names
       run: |
