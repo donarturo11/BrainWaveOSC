@@ -96,7 +96,7 @@ jobs:
                sudo bash ./scripts/${{ matrix.of-sys }}/ubuntu/install_dependencies.sh
            fi
            bash ./scripts/${{ matrix.of-sys }}/download_libs.sh
-           if [ ${{runner.os }} != 'macOS' || {{ matrix.of-sys }} != 'vs' ]; then
+           if [ ${{runner.os }} != 'macOS' ] || [ {{ matrix.of-sys }} != 'vs' ]; then
                bash ./scripts/${{ matrix.of-sys }}/compileOF.sh    
            fi
            
