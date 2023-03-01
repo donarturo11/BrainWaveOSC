@@ -193,7 +193,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: ${{ env.PACKAGE_NAME }}
-        path: ${{ env.WORKSPACE }}/${{ env.PACKAGE_NAME }}
+        path: ${{ github.workspace }}/${{ env.PACKAGE_NAME }}
                 
     - name: Print variables
       run: |
