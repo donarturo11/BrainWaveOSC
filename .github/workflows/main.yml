@@ -174,7 +174,7 @@ jobs:
           codesign --verbose --strict --continue --timestamp --force --deep -s- *.app
           cp -av * /Volumes/${PACKAGE_NAME}
           ln -s /Applications/ /Volumes/${PACKAGE_NAME}/Applications
-          hdiutil detach /Volumes/${PACKAGE_NAME}/Applications
+          hdiutil detach /Volumes/${PACKAGE_NAME}
           hdiutil convert temp.dmg -format UDBZ \
                     -o ${DESTDIR}/${PACKAGE_NAME}.dmg
           shasum -a 256 ${DESTDIR}/${PACKAGE_NAME}.dmg
