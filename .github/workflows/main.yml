@@ -117,11 +117,11 @@ jobs:
            echo "::notice:: ${PWD}"
            cp -R addons/* ${{ env.OF_ROOT }}/addons/
     
-    - name: Setup MSBuild
-      if: ${{ matrix.of-sys == 'vs' }}
-      uses: microsoft/setup-msbuild@v1.1
-      with:
-          msbuild-architecture: x64
+#    - name: Setup MSBuild
+#      if: ${{ matrix.of-sys == 'vs' }}
+#      uses: microsoft/setup-msbuild@v1.1
+#      with:
+#          msbuild-architecture: x64
     
     - name: Prepare version
       run: |
@@ -133,12 +133,18 @@ jobs:
           cd ${{ env.BUILD_DIR }}
           make
     
-    - name: Build (MSVC)
+    - name: Find MSBuild (MSVC)
       if: ${{ matrix.of-sys == 'vs' }}
       run: |
           echo "::notice::PATH=$PATH"
           echo "::notice::vswhere-path=${{ env.vswhere-path }}"
-          msbuild ${BUILD_DIR}/BrainwaveOSC.vcxproj
+          MSBUILD_PATH=$(cygpath -u "$(vswhere -property installationPath -latest)"/current/bin/)
+          echo "${MSBUILD_PATH}" >> $GITHUB_PATH
+    
+    - name: Build (MSVC)
+      if: ${{ matrix.of-sys == 'vs' }}
+      run: |
+          msbuild.exe ${BUILD_DIR}/BrainwaveOSC.vcxproj
     
     - name: Prepare Packages names
       run: |
