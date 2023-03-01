@@ -135,16 +135,7 @@ jobs:
       run: |
           cd ${{ env.BUILD_DIR }}
           make -j${NJOBS}
-    
-#    - name: Find MSBuild (MSVC)
-#      if: ${{ matrix.of-sys == 'vs' }}
-#      run: |
-#          echo "::notice::PATH=$PATH"
-#          echo "::notice::vswhere-path=${{ env.vswhere-path }}"
-#          MSBUILD_PATH=$(cygpath -u "$(vswhere -property installationPath -latest)"/current/bin/)
-#          PATH=${PATH}:"${MSBUILD_PATH}"
-#          echo "PATH=${PATH}" >> $GITHUB_ENV
-    
+        
     - name: Build (MSVC)
       if: ${{ matrix.of-sys == 'vs' }}
       shell: pwsh
@@ -152,27 +143,30 @@ jobs:
     
     - name: Prepare Packages names
       run: |
-          PACKAGE_NAME=${{github.workspace}}/${{env.pkgname}}-${{matrix.name}}
+          PACKAGE_NAME=${{env.pkgname}}-${{matrix.name}}
           echo "PACKAGE_NAME=$PACKAGE_NAME" >> ${GITHUB_ENV}
     
     - name: Prepare Artifacts directory
       run: |
-          DESTDIR=${{github.workspace}}/${{env.pkgname}}-${{matrix.name}}
+          DESTDIR=${{ env.WORKSPACE }}/${{ env.PACKAGE_NAME }}
           echo "DESTDIR=$DESTDIR" >> $GITHUB_ENV
           mkdir $DESTDIR || echo "::warning:: $DESTDIR already exists"
     
     - name: Prepare binaries to upload (windows)
+      if: ${{runner.os == 'Windows'}}
       run: |
           cd ${BUILD_DIR}/bin
-          7z a -r ${DESTDIR}/${PACKAGE_NAME} *
+          7z a -r ${DESTDIR}/${PACKAGE_NAME}.7z *
       
     - name: Prepare binaries to upload (Linux)
+      if: ${{runner.os == 'Linux'}}
       run: |
           cd ${BUILD_DIR}/
           mv bin ${PACKAGE_NAME}
           tar -vczf $DESTDIR/${PACKAGE_NAME} ${PACKAGE_NAME}
     
     - name: Prepare binaries to upload (MacOS)
+      if: ${{runner.os == 'macOS'}}
       run: |
           hdiutil create -size 700m -fs HFS+ -volname "${PACKAGE_NAME}" temp.dmg
           hdiutil attach temp.dmg
