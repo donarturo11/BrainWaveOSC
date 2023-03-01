@@ -112,7 +112,7 @@ jobs:
            echo PROJECT_DIR=${PROJECT_DIR} >> $GITHUB_ENV
            echo BUILD_DIR=${BUILD_DIR} >> $GITHUB_ENV
            echo NJOBS=$(nproc) >> $GITHUB_ENV
-           if [ ${{ matrix.of-sys }} == 'macos' ]; then
+           if [ ${{ matrix.of-sys }} == 'osx' ]; then
                echo PLATFORM_CFLAGS="-arch x86_64 -arch arm64 --disable-dependency-tracking"  >> $GITHUB_ENV
                echo PLATFORM_LDFLAGS="-arch x86_64 -arch arm64 --disable-dependency-tracking" >> $GITHUB_ENV
            fi
