@@ -170,13 +170,14 @@ jobs:
       run: |
           hdiutil create -size 700m -fs HFS+ -volname "${PACKAGE_NAME}" temp.dmg
           hdiutil attach temp.dmg
+          TEMPDMG=${PWD}/temp.dmg
           cd ${BUILD_DIR}/bin
           codesign --verbose --strict --continue --timestamp --force --deep -s- *.app
           cp -av * /Volumes/${PACKAGE_NAME}
           ln -s /Applications/ /Volumes/${PACKAGE_NAME}/Applications
           hdiutil detach /Volumes/${PACKAGE_NAME}
           mkdir ${DESTDIR} || echo "::warning:: ${DESTDIR} already exists"
-          hdiutil convert temp.dmg -format UDBZ \
+          hdiutil convert ${TEMPDMG} -format UDBZ \
                     -o ${DESTDIR}/${PACKAGE_NAME}.dmg
           shasum -a 256 ${DESTDIR}/${PACKAGE_NAME}.dmg
           
