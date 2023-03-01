@@ -138,7 +138,9 @@ jobs:
           if [ ${{ matrix.name }} == 'macos' ]; then
               export CXX="clang" 
               export CC="clang" 
+              export ONLY_ACTIVE_ARCH=NO
               export PLATFORM_OPTIMIZATION_CFLAGS_RELEASE=" -arch x86_64 -arch arm64 "
+              export PLATFORM_LDFLAGS=" -arch x86_64 -arch arm64 "
               export MACOSX_DEPLOYMENT_TARGET=11
               export MAC_OS_MIN_VERSION=11.0
           fi
