@@ -120,6 +120,8 @@ jobs:
     - name: Setup MSBuild
       if: ${{ matrix.of-sys == 'vs' }}
       uses: microsoft/setup-msbuild@v1.1
+      with:
+          msbuild-architecture: x64
     
     - name: Prepare version
       run: |
@@ -134,6 +136,8 @@ jobs:
     - name: Build (MSVC)
       if: ${{ matrix.of-sys == 'vs' }}
       run: |
+          echo "::notice::PATH=$PATH"
+          echo "::notice::vswhere-path=${{ env.vswhere-path }}"
           msbuild ${BUILD_DIR}/BrainwaveOSC.vcxproj
     
     - name: Prepare Packages names
@@ -172,14 +176,14 @@ jobs:
           shasum -a 256 ${DESTDIR}/${PACKAGE_NAME}.dmg
           
                      
-#    - name: Setup tmate session
-#      uses: mxschmitt/action-tmate@v3
-#      if: ${{ failure() }}
-#      #if: ${{runner.os == 'macOS'}}
-#      with:
-#          limit-access-to-actor: true
-#          #install-dependencies: false
-#      timeout-minutes: 60
+    - name: Setup tmate session
+      uses: mxschmitt/action-tmate@v3
+      if: ${{ failure() }}
+      #if: ${{runner.os == 'macOS'}}
+      with:
+          limit-access-to-actor: true
+          #install-dependencies: false
+      timeout-minutes: 60
 
     - name: Upload All Binaries
       uses: actions/upload-artifact@v2
