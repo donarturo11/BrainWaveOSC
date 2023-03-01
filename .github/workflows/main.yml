@@ -100,13 +100,6 @@ jobs:
            if [ ${{runner.os }} != 'macOS' ] && [ {{ matrix.of-sys }} != 'vs' ]; then
                bash ./scripts/${{ matrix.of-sys }}/compileOF.sh    
            fi
-           if [ ${{ matrix.name }} == 'macos' ]; then
-              echo CXX="clang" >> $GITHUB_ENV
-              echo CC="clang" >> $GITHUB_ENV 
-              echo ALL_CFLAGS=" -arch x86_64 -arch arm64 " >> $GITHUB_ENV
-              echo MACOSX_DEPLOYMENT_TARGET=11 >> $GITHUB_ENV
-              echo MAC_OS_MIN_VERSION=11.0 >> $GITHUB_ENV
-          fi
 
     - name: Checkout Repo
       uses: actions/checkout@v2
@@ -142,7 +135,13 @@ jobs:
       if: ${{ matrix.of-sys != 'vs' }}
       run: |
           cd ${{ env.BUILD_DIR }}
-          make -j${NJOBS}
+          if [ ${{ matrix.name }} == 'macos' ]; then
+              make -j${NJOBS} \
+                  PLATFORM_OPTIMIZATION_CFLAGS_RELEASE=" -arch x86_64 -arch arm64 " \
+                  MAC_OS_MIN_VERSION=11
+          else
+              make -j${NJOBS}
+          fi
         
     - name: Build (MSVC)
       if: ${{ matrix.of-sys == 'vs' }}
