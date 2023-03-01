@@ -112,6 +112,9 @@ jobs:
            BUILD_DIR=${PROJECT_DIR}/BrainWaveOSC/
            echo PROJECT_DIR=${PROJECT_DIR} >> $GITHUB_ENV
            echo BUILD_DIR=${BUILD_DIR} >> $GITHUB_ENV
+           if [ {{ matrix.of-sys }} == 'vs' ]; then
+               echo BUILD_DIR_WIN=$(cygpath -w "${BUILD_DIR}") >> $GITHUB_ENV
+           fi
                       
            cd $PROJECT_DIR
            echo "::notice:: ${PWD}"
@@ -146,7 +149,7 @@ jobs:
       if: ${{ matrix.of-sys == 'vs' }}
       shell: pwsh
       run: |
-          msbuild ${{env.BUILD_DIR}}/BrainwaveOSC.vcxproj
+          msbuild ${{env.BUILD_DIR_WIN}}\BrainwaveOSC.vcxproj
     
     - name: Prepare Packages names
       run: |
