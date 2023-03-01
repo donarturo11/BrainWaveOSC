@@ -135,7 +135,7 @@ jobs:
       run: |
           cd ${{ env.BUILD_DIR }}
           if [ ${{ matrix.of-sys }} == 'osx' ]; then
-              export PLATFORM_CFLAGS =" -arch x86_64 -arch arm64"
+              export PLATFORM_CFLAGS=" -arch x86_64 -arch arm64 "
               export MACOSX_DEPLOYMENT_TARGET=11
               export OSX_ARCHITECTURES="x86_64;arm64"
           fi
