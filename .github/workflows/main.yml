@@ -135,8 +135,8 @@ jobs:
     - name: Prepare version (snapshot)
       if: (! startsWith(github.ref, 'refs/tags/v'))
       run: |
-          echo "::notice:: ${{ github.ref_name }}"
-          echo PKG_VER=$(git log -1 --pretty=%h) >> $GITHUB_ENV
+          echo PKG_VER="$(git log -1 --pretty=%h)" >> $GITHUB_ENV
+          echo "::notice:: ${PKGVER}"
 
     - name: Build (UNIX/Msys)
       if: ${{ matrix.of-sys != 'vs' }}
