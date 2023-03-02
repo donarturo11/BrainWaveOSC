@@ -11,7 +11,7 @@
 // osascript -e 'tell application "System Events" to sleep'
 
 #ifndef _VER
-#define _VER 0.992
+#define _VER "0.993-development"
 #endif
 
 struct EegData {
