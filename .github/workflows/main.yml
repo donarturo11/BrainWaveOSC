@@ -137,9 +137,9 @@ jobs:
           cd ${{ env.BUILD_DIR }}
           if [ ${{ matrix.name }} == 'macos' ]; then
               make -j${NJOBS} \
-                  PLATFORM_OPTIMIZATION_CFLAGS_RELEASE=" -arch x86_64 -arch arm64 " \
+                  PLATFORM_OPTIMIZATION_CFLAGS_RELEASE=" -target x86_64-apple-macos -target arm64-apple-macos " \
                   MAC_OS_MIN_VERSION=11 \
-                  PLATFORM_LDFLAGS=" -arch x86_64 -arch amd64
+                  PLATFORM_LDFLAGS=" -target x86_64-apple-macos -target arm64-apple-macos "
           else
               make -j${NJOBS}
           fi
