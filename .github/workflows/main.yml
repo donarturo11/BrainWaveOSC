@@ -1,7 +1,7 @@
-name: BrainwaveOSC
-
 # NOTE: Build jobs for MINGW64 are tomporarly disactivated because of issues with openGL
 # To install for windows use msbuild (MSVC) instead
+
+name: BrainwaveOSC
 
 on:
   pull_request:
@@ -204,7 +204,7 @@ jobs:
         id: get_tag
         run: echo ::set-output name=BUILD_TAG::build-$(date +'%Y%m%d%H%M')
 
-      - name: Get macOS Binary
+      - name: Get macOS Binary (universal)
         uses: actions/download-artifact@v3
         with:
           name: ${{env.pkgname}}-macos-universal
