@@ -10,7 +10,9 @@
 // osascript -e 'tell application "System Events" to shut down'
 // osascript -e 'tell application "System Events" to sleep'
 
-#define _VER 0.991
+#ifndef _VER
+#define _VER 0.992
+#endif
 
 struct EegData {
     float signal; // 0 = good
