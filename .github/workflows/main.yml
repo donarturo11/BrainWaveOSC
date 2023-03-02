@@ -1,6 +1,3 @@
-# NOTE: Build jobs for MINGW64 are tomporarly disactivated because of issues with openGL
-# To install for windows use msbuild (MSVC) instead
-
 name: BrainwaveOSC
 
 on:
