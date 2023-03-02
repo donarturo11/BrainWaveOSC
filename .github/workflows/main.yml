@@ -138,7 +138,8 @@ jobs:
           if [ ${{ matrix.name }} == 'macos' ]; then
               make -j${NJOBS} \
                   PLATFORM_OPTIMIZATION_CFLAGS_RELEASE=" -arch x86_64 -arch arm64 " \
-                  MAC_OS_MIN_VERSION=11
+                  MAC_OS_MIN_VERSION=11 \
+                  PLATFORM_LDFLAGS=" -arch x86_64 -arch amd64
           else
               make -j${NJOBS}
           fi
