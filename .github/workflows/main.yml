@@ -139,7 +139,7 @@ jobs:
           cd $BUILD_DIR
           export PKG_VER="$(git log -1 --pretty=%h)"
           if [ ! -z "$PKG_VER" ]; then
-              echo VER_CFLAG="-D_VER=${PKG_VER}" >> $GITHUB_ENV
+              echo "VER_CFLAG=\"-D_VER=${PKG_VER}\"" >> $GITHUB_ENV
           fi
           echo "::notice:: ${PKG_VER}"
           echo "::notice:: ${VER_CFLAG}"
