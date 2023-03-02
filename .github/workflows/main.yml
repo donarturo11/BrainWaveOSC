@@ -132,7 +132,7 @@ jobs:
           echo "::notice:: PKG_VER=${{ github.ref }}"
 
     - name: Prepare version
-      if: ! (startsWith(github.ref, 'refs/tags/v'))
+      if: (! startsWith(github.ref, 'refs/tags/v'))
       run: |
           echo "::notice:: ${{ github.ref }}"
           echo PKG_VER=$(git rev-parse --short HEAD) >> $GITHUB_ENV
