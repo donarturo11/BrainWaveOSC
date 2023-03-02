@@ -131,7 +131,7 @@ jobs:
       if: startsWith(github.ref, 'refs/tags/v')
       run: |
           echo PKG_VER=${{ github.ref }} >> $GITHUB_ENV
-    
+
     - name: Prepare version
       if: !startsWith(github.ref, 'refs/tags/v')
       run: |
