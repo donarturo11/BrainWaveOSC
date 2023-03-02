@@ -10,6 +10,7 @@ on:
 
 env:
   pkgname: BrainwaveOSC
+  IDENTITY_NAME: ${{ secrets.IDENTITY_NAME }}
 jobs:
   build:
     strategy:
@@ -35,7 +36,7 @@ jobs:
       run: |
           CERTIFICATE_PATH=$RUNNER_TEMP/build_certificate.p12
           KEYCHAIN_PATH=$RUNNER_TEMP/app-signing.keychain-db
-          echo "IDENTITY_NAME=donarturo11.github.io" >> $GITHUB_ENV
+          #echo "IDENTITY_NAME=${IDENTITY_NAME}" >> $GITHUB_ENV
           echo -n "$P12_CERTIFICATE_BASE64" | base64 --decode -o $CERTIFICATE_PATH
           echo "::notice:: decode certificate succeed"
           security create-keychain -p "$KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
