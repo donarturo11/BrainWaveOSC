@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="BrainWaveOSC" />
+		<Option makefile_is_custom="1" />
+		<Option execution_dir="." />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug x64">
+				<Option output="bin/BrainWaveOSC_debug" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option deps_output="bin/" />
+				<Option type="0" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-Wall" />
+					<Add option="-g" />
+					<Add option="-O0" />
+					<Add directory="src/" />
+					<Add directory="src/BrainWaveGUI/" />
+					<Add directory="../../../addons/ofxOsc/libs/" />
+					<Add directory="../../../addons/ofxOsc/libs/oscpack/" />
+					<Add directory="../../../addons/ofxOsc/libs/oscpack/src/" />
+					<Add directory="../../../addons/ofxOsc/libs/oscpack/src/ip/" />
+					<Add directory="../../../addons/ofxOsc/libs/oscpack/src/ip/posix/" />
+					<Add directory="../../../addons/ofxOsc/libs/oscpack/src/ip/win32/" />
+					<Add directory="../../../addons/ofxOsc/libs/oscpack/src/osc/" />
+					<Add directory="../../../addons/ofxOsc/src/" />
+					<Add directory="../../../addons/ofxThinkgear/libs/" />
+					<Add directory="../../../addons/ofxThinkgear/libs/ThinkGear.bundle/" />
+					<Add directory="../../../addons/ofxThinkgear/libs/ThinkGear.bundle/Contents/" />
+					<Add directory="../../../addons/ofxThinkgear/libs/ThinkGear.bundle/Contents/MacOS/" />
+					<Add directory="../../../addons/ofxThinkgear/libs/ThinkGear.bundle/Contents/Resources/" />
+					<Add directory="../../../addons/ofxThinkgear/libs/ThinkGear.bundle/Contents/Resources/English.lproj/" />
+					<Add directory="../../../addons/ofxThinkgear/src/" />
+					<Add directory="../../../addons/ofxTouchGUI/src/" />
+					<Add directory="../../../addons/ofxXmlSettings/libs/" />
+					<Add directory="../../../addons/ofxXmlSettings/src/" />
+				</Compiler>
+			</Target>
+			<Target title="Release x64">
+				<Option output="bin/BrainWaveOSC" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option deps_output="bin/" />
+				<Option type="0" />
+				<Option compiler="gcc" />
+				<Option projectCompilerOptionsRelation="1" />
+				<Compiler>
+					<Add option="none" />
+					<Add option="-Wall" />
+					<Add directory="src/" />
+					<Add directory="src/BrainWaveGUI/" />
+					<Add directory="../../../addons/ofxOsc/libs/" />
+					<Add directory="../../../addons/ofxOsc/libs/oscpack/" />
+					<Add directory="../../../addons/ofxOsc/libs/oscpack/src/" />
+					<Add directory="../../../addons/ofxOsc/libs/oscpack/src/ip/" />
+					<Add directory="../../../addons/ofxOsc/libs/oscpack/src/ip/posix/" />
+					<Add directory="../../../addons/ofxOsc/libs/oscpack/src/ip/win32/" />
+					<Add directory="../../../addons/ofxOsc/libs/oscpack/src/osc/" />
+					<Add directory="../../../addons/ofxOsc/src/" />
+					<Add directory="../../../addons/ofxThinkgear/libs/" />
+					<Add directory="../../../addons/ofxThinkgear/libs/ThinkGear.bundle/" />
+					<Add directory="../../../addons/ofxThinkgear/libs/ThinkGear.bundle/Contents/" />
+					<Add directory="../../../addons/ofxThinkgear/libs/ThinkGear.bundle/Contents/MacOS/" />
+					<Add directory="../../../addons/ofxThinkgear/libs/ThinkGear.bundle/Contents/Resources/" />
+					<Add directory="../../../addons/ofxThinkgear/libs/ThinkGear.bundle/Contents/Resources/English.lproj/" />
+					<Add directory="../../../addons/ofxThinkgear/src/" />
+					<Add directory="../../../addons/ofxTouchGUI/src/" />
+					<Add directory="../../../addons/ofxXmlSettings/libs/" />
+					<Add directory="../../../addons/ofxXmlSettings/src/" />
+				</Compiler>
+			</Target>
+			<Target title="BrainWaveOSC-Release">
+				<Option output="bin/BrainWaveOSC" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option deps_output="bin/" />
+				<Option type="0" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-Wall" />
+					<Add directory="src/" />
+					<Add directory="src/BrainWaveGUI/" />
+					<Add directory="../../../addons/ofxOsc/libs/" />
+					<Add directory="../../../addons/ofxOsc/libs/oscpack/" />
+					<Add directory="../../../addons/ofxOsc/libs/oscpack/src/" />
+					<Add directory="../../../addons/ofxOsc/libs/oscpack/src/ip/" />
+					<Add directory="../../../addons/ofxOsc/libs/oscpack/src/ip/posix/" />
+					<Add directory="../../../addons/ofxOsc/libs/oscpack/src/ip/win32/" />
+					<Add directory="../../../addons/ofxOsc/libs/oscpack/src/osc/" />
+					<Add directory="../../../addons/ofxOsc/src/" />
+					<Add directory="../../../addons/ofxThinkgear/libs/" />
+					<Add directory="../../../addons/ofxThinkgear/libs/ThinkGear.bundle/" />
+					<Add directory="../../../addons/ofxThinkgear/libs/ThinkGear.bundle/Contents/" />
+					<Add directory="../../../addons/ofxThinkgear/libs/ThinkGear.bundle/Contents/MacOS/" />
+					<Add directory="../../../addons/ofxThinkgear/libs/ThinkGear.bundle/Contents/Resources/" />
+					<Add directory="../../../addons/ofxThinkgear/libs/ThinkGear.bundle/Contents/Resources/English.lproj/" />
+					<Add directory="../../../addons/ofxThinkgear/src/" />
+					<Add directory="../../../addons/ofxTouchGUI/src/" />
+					<Add directory="../../../addons/ofxXmlSettings/libs/" />
+					<Add directory="../../../addons/ofxXmlSettings/src/" />
+				</Compiler>
+			</Target>
+			<Target title="Debug Win32">
+				<Option output="bin/BrainWaveOSC_debug" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option deps_output="bin/" />
+				<Option type="0" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+					<Add option="-O0" />
+					<Add option="-Wall" />
+					<Add directory="src/" />
+					<Add directory="src/BrainWaveGUI/" />
+					<Add directory="../../../addons/ofxOsc/libs/" />
+					<Add directory="../../../addons/ofxOsc/libs/oscpack/" />
+					<Add directory="../../../addons/ofxOsc/libs/oscpack/src/" />
+					<Add directory="../../../addons/ofxOsc/libs/oscpack/src/ip/" />
+					<Add directory="../../../addons/ofxOsc/libs/oscpack/src/ip/posix/" />
+					<Add directory="../../../addons/ofxOsc/libs/oscpack/src/ip/win32/" />
+					<Add directory="../../../addons/ofxOsc/libs/oscpack/src/osc/" />
+					<Add directory="../../../addons/ofxOsc/src/" />
+					<Add directory="../../../addons/ofxThinkgear/libs/" />
+					<Add directory="../../../addons/ofxThinkgear/libs/ThinkGear.bundle/" />
+					<Add directory="../../../addons/ofxThinkgear/libs/ThinkGear.bundle/Contents/" />
+					<Add directory="../../../addons/ofxThinkgear/libs/ThinkGear.bundle/Contents/MacOS/" />
+					<Add directory="../../../addons/ofxThinkgear/libs/ThinkGear.bundle/Contents/Resources/" />
+					<Add directory="../../../addons/ofxThinkgear/libs/ThinkGear.bundle/Contents/Resources/English.lproj/" />
+					<Add directory="../../../addons/ofxThinkgear/src/" />
+					<Add directory="../../../addons/ofxTouchGUI/src/" />
+					<Add directory="../../../addons/ofxXmlSettings/libs/" />
+					<Add directory="../../../addons/ofxXmlSettings/src/" />
+				</Compiler>
+			</Target>
+		</Build>
+		<Unit filename="../../../addons/ofxOsc/libs/oscpack/src/ip/IpEndpointName.cpp">
+			<Option target="Release x64" />
+			<Option target="BrainWaveOSC-Release" />
+			<Option target="Debug Win32" />
+		</Unit>
+		<Unit filename="../../../addons/ofxOsc/libs/oscpack/src/ip/IpEndpointName.h">
+			<Option target="Release x64" />
+			<Option target="BrainWaveOSC-Release" />
+			<Option target="Debug Win32" />
+		</Unit>
+		<Unit filename="../../../addons/ofxOsc/libs/oscpack/src/ip/NetworkingUtils.h">
+			<Option target="Release x64" />
+			<Option target="BrainWaveOSC-Release" />
+			<Option target="Debug Win32" />
+		</Unit>
+		<Unit filename="../../../addons/ofxOsc/libs/oscpack/src/ip/PacketListener.h" />
+		<Unit filename="../../../addons/ofxOsc/libs/oscpack/src/ip/TimerListener.h" />
+		<Unit filename="../../../addons/ofxOsc/libs/oscpack/src/ip/UdpSocket.h" />
+		<Unit filename="../../../addons/ofxOsc/libs/oscpack/src/ip/win32/NetworkingUtils.cpp">
+			<Option target="Release x64" />
+			<Option target="BrainWaveOSC-Release" />
+			<Option target="Debug Win32" />
+		</Unit>
+		<Unit filename="../../../addons/ofxOsc/libs/oscpack/src/ip/win32/UdpSocket.cpp">
+			<Option target="Release x64" />
+			<Option target="BrainWaveOSC-Release" />
+			<Option target="Debug Win32" />
+		</Unit>
+		<Unit filename="../../../addons/ofxOsc/libs/oscpack/src/osc/MessageMappingOscPacketListener.h" />
+		<Unit filename="../../../addons/ofxOsc/libs/oscpack/src/osc/OscException.h" />
+		<Unit filename="../../../addons/ofxOsc/libs/oscpack/src/osc/OscHostEndianness.h" />
+		<Unit filename="../../../addons/ofxOsc/libs/oscpack/src/osc/OscOutboundPacketStream.cpp" />
+		<Unit filename="../../../addons/ofxOsc/libs/oscpack/src/osc/OscOutboundPacketStream.h" />
+		<Unit filename="../../../addons/ofxOsc/libs/oscpack/src/osc/OscPacketListener.h" />
+		<Unit filename="../../../addons/ofxOsc/libs/oscpack/src/osc/OscPrintReceivedElements.cpp" />
+		<Unit filename="../../../addons/ofxOsc/libs/oscpack/src/osc/OscPrintReceivedElements.h" />
+		<Unit filename="../../../addons/ofxOsc/libs/oscpack/src/osc/OscReceivedElements.cpp" />
+		<Unit filename="../../../addons/ofxOsc/libs/oscpack/src/osc/OscReceivedElements.h" />
+		<Unit filename="../../../addons/ofxOsc/libs/oscpack/src/osc/OscTypes.cpp" />
+		<Unit filename="../../../addons/ofxOsc/libs/oscpack/src/osc/OscTypes.h" />
+		<Unit filename="../../../addons/ofxOsc/src/ofxOsc.h" />
+		<Unit filename="../../../addons/ofxOsc/src/ofxOscArg.h" />
+		<Unit filename="../../../addons/ofxOsc/src/ofxOscBundle.cpp" />
+		<Unit filename="../../../addons/ofxOsc/src/ofxOscBundle.h" />
+		<Unit filename="../../../addons/ofxOsc/src/ofxOscMessage.cpp" />
+		<Unit filename="../../../addons/ofxOsc/src/ofxOscMessage.h" />
+		<Unit filename="../../../addons/ofxOsc/src/ofxOscParameterSync.cpp" />
+		<Unit filename="../../../addons/ofxOsc/src/ofxOscParameterSync.h" />
+		<Unit filename="../../../addons/ofxOsc/src/ofxOscReceiver.cpp" />
+		<Unit filename="../../../addons/ofxOsc/src/ofxOscReceiver.h" />
+		<Unit filename="../../../addons/ofxOsc/src/ofxOscSender.cpp" />
+		<Unit filename="../../../addons/ofxOsc/src/ofxOscSender.h" />
+		<Unit filename="../../../addons/ofxThinkgear/src/ThinkGearStreamParser.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../../../addons/ofxThinkgear/src/ThinkGearStreamParser.h" />
+		<Unit filename="../../../addons/ofxThinkgear/src/ThinkgearCommsDriver.cpp" />
+		<Unit filename="../../../addons/ofxThinkgear/src/ThinkgearCommsDriver.h" />
+		<Unit filename="../../../addons/ofxThinkgear/src/ofxThinkgear.cpp" />
+		<Unit filename="../../../addons/ofxThinkgear/src/ofxThinkgear.h" />
+		<Unit filename="../../../addons/ofxTouchGUI/src/ofxTouchGUI.h" />
+		<Unit filename="../../../addons/ofxTouchGUI/src/ofxTouchGUI.mm" />
+		<Unit filename="../../../addons/ofxTouchGUI/src/ofxTouchGUIBase.h" />
+		<Unit filename="../../../addons/ofxTouchGUI/src/ofxTouchGUIBase.mm" />
+		<Unit filename="../../../addons/ofxTouchGUI/src/ofxTouchGUIButton.h" />
+		<Unit filename="../../../addons/ofxTouchGUI/src/ofxTouchGUIButton.mm" />
+		<Unit filename="../../../addons/ofxTouchGUI/src/ofxTouchGUIDataGraph.h" />
+		<Unit filename="../../../addons/ofxTouchGUI/src/ofxTouchGUIDataGraph.mm" />
+		<Unit filename="../../../addons/ofxTouchGUI/src/ofxTouchGUIDropDown.h" />
+		<Unit filename="../../../addons/ofxTouchGUI/src/ofxTouchGUIDropDown.mm" />
+		<Unit filename="../../../addons/ofxTouchGUI/src/ofxTouchGUIEventArgs.h" />
+		<Unit filename="../../../addons/ofxTouchGUI/src/ofxTouchGUISlider.h" />
+		<Unit filename="../../../addons/ofxTouchGUI/src/ofxTouchGUISlider.mm" />
+		<Unit filename="../../../addons/ofxTouchGUI/src/ofxTouchGUIText.h" />
+		<Unit filename="../../../addons/ofxTouchGUI/src/ofxTouchGUIText.mm" />
+		<Unit filename="../../../addons/ofxTouchGUI/src/ofxTouchGUITextInput.h" />
+		<Unit filename="../../../addons/ofxTouchGUI/src/ofxTouchGUITextInput.mm" />
+		<Unit filename="../../../addons/ofxTouchGUI/src/ofxTouchGUIToggleButton.h" />
+		<Unit filename="../../../addons/ofxTouchGUI/src/ofxTouchGUIToggleButton.mm" />
+		<Unit filename="../../../addons/ofxXmlSettings/libs/tinyxml.cpp" />
+		<Unit filename="../../../addons/ofxXmlSettings/libs/tinyxml.h" />
+		<Unit filename="../../../addons/ofxXmlSettings/libs/tinyxmlerror.cpp" />
+		<Unit filename="../../../addons/ofxXmlSettings/libs/tinyxmlparser.cpp" />
+		<Unit filename="../../../addons/ofxXmlSettings/src/ofxXmlSettings.cpp" />
+		<Unit filename="../../../addons/ofxXmlSettings/src/ofxXmlSettings.h" />
+		<Unit filename="icon.rc" />
+		<Unit filename="src/BrainWaveGUI/BrainWaveGUI.h" />
+		<Unit filename="src/BrainWaveGUI/BrainWaveGUI.mm" />
+		<Unit filename="src/BrainWaveGUI/EegFrequencyGraph.h" />
+		<Unit filename="src/BrainWaveGUI/EegFrequencyGraph.mm" />
+		<Unit filename="src/BrainWaveGUI/EegTimeGraph.h" />
+		<Unit filename="src/BrainWaveGUI/EegTimeGraph.mm" />
+		<Unit filename="src/main.cpp" />
+		<Unit filename="src/ofApp.cpp" />
+		<Unit filename="src/ofApp.h" />
+		<Extensions>
+			<lib_finder disable_auto="1" />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>
