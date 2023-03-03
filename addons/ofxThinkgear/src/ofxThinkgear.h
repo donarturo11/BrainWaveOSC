@@ -121,7 +121,7 @@ public:
 	}
 
 private:
-	#ifdef TARGET_OSX
+	#ifdef ENABLE_TG_COMMS_DRIVER
     ThinkgearCommsDriver driver;
 	#endif
     ThinkGearStreamParser parser;

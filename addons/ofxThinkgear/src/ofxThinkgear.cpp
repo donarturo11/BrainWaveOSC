@@ -178,7 +178,7 @@ void ofxThinkgear::setup(string deviceName, int baudRate, ThinkGearImplementatio
     this->connectionType = connectionType;
     
     if(connectionType == TG_COMMS_DRIVER) {
-		#ifdef TARGET_OSX
+		#ifdef ENABLE_TG_COMMS_DRIVER
         driver.setup(deviceName, baudRate,this,&ofxThinkgear::tgHandleCommsDriverDataValueFunc);
         if(driver.isReady) isReady = true;
 		#endif
@@ -222,7 +222,7 @@ void ofxThinkgear::idle() {
 void ofxThinkgear::update(){
     
     if(connectionType == TG_COMMS_DRIVER) {
-        #ifdef TARGET_OSX
+        #ifdef ENABLE_TG_COMMS_DRIVER
         driver.update();
         isReady = driver.isReady;
         if(!isReady && ofGetFrameNum() % noConnectionRestartCount == 0) {
