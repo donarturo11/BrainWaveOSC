@@ -71,7 +71,7 @@ void ofApp::setup(){
     
     normaliseMaxToCurrentSet = false;    
     
-    // default device settings
+    // default device settings  // TODO automatize setup
     deviceName = "/dev/tty.BrainBand-DevB"; // osx address, windows is com6 or something
     deviceBaudRate = 57600;
     
@@ -91,9 +91,21 @@ void ofApp::setup(){
     // change in settings.xml to launch minimised window with no logging
     if(smallWindow) {
         ofSetLogLevel(OF_LOG_SILENT);
-        ofSetWindowShape(250, 75);
+        setSmallWindow();
         settings.hide();
+    } else {
+        setNormalWindow();
     }
+}
+
+void ofApp::setSmallWindow() {
+    ofSetWindowShape(250, 75);
+    smallWindow = true;
+}
+
+void ofApp::setNormalWindow() {
+    ofSetWindowShape(1280, 850);
+    smallWindow = false;
 }
 
 void ofApp::setupGui() {
@@ -267,9 +279,9 @@ void ofApp::setupGui() {
     
     
     int freqValues = 9;
-    graphHeight = 230;
+    graphHeight = 200;
     //graphItemHeight = graphHeight + 25;
-    frequencyGraph= settings.addCustomTimeFrequencyGraph("EEG frequencies (normalised)", freqValues, graphOffsetX, graphOffsetY + graphItemHeight * 8, graphWidth, graphHeight);
+    frequencyGraph= settings.addCustomTimeFrequencyGraph("EEG frequencies (normalised)", freqValues, graphOffsetX, graphOffsetY + graphItemHeight * 8, graphWidth, graphHeight-60);
     frequencyGraph->setBackgroundClrs(ofColor(255,90));
     frequencyGraph->setTextOffsets(0, -5);
     //frequencyGraph->setBackgroundClrs(ofColor(40,40,40,255));
@@ -725,9 +737,9 @@ void ofApp::keyPressed(int key){
         settings.toggleDisplay();
         smallWindow = !smallWindow;
         if(!smallWindow) {
-            ofSetWindowShape(1280, 960);
+            setNormalWindow();
         } else {
-            ofSetWindowShape(250, 75);
+            setSmallWindow();
         }
     } else if(key == 'p') {
         isPaused = !isPaused;
