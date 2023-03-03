@@ -144,7 +144,7 @@ void ofApp::setupGui() {
     int graphHeight = 60;
     int graphItemHeight = graphHeight + 25;
     int graphOffsetX = 20;
-    int graphOffsetY = 200;//120;
+    int graphOffsetY = 150;//120;
     int valuesToSave = 512;//graphWidth; // 1 for each pixel
     EegTimeGraph::maxDynamicEegValues = valuesToSave;
     for(int i = 0;i < valuesToSave; i++) {
@@ -182,12 +182,12 @@ void ofApp::setupGui() {
     
     
     // moving the settings position cursor
-    settings.moveTo(20,430);
+    settings.moveTo(20,480);
     
     // reset graph max
     settings.setItemSize(bigWidth, smallHeight);
     settings.addText("---------------------------------------------------------------------------------------------");
-    settings.moveTo(20,455);
+    settings.moveTo(20,500);
     settings.setItemSize(smallWidth, bigHeight);
     ofxTouchGUIButton* resetMaxBtn = settings.addButton("RESET EEG GRAPH'S TO MAX VALUE");
     ofAddListener(resetMaxBtn->onChangedEvent, this, &ofApp::onGUIChanged);
