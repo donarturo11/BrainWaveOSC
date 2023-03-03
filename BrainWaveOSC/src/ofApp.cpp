@@ -144,7 +144,7 @@ void ofApp::setupGui() {
     int graphHeight = 60;
     int graphItemHeight = graphHeight + 25;
     int graphOffsetX = 20;
-    int graphOffsetY = 100;//120;
+    int graphOffsetY = 200;//120;
     int valuesToSave = 512;//graphWidth; // 1 for each pixel
     EegTimeGraph::maxDynamicEegValues = valuesToSave;
     for(int i = 0;i < valuesToSave; i++) {
@@ -689,11 +689,11 @@ void ofApp::draw(){
     if(allData.signal == 0) {
         //ofSetColor(115, 180, 122);
         ofSetColor(97, 178, 106);
-        ofRect(15, 109, 115, 15);
+        ofRect(15, 210, 115, 15);
         
     } else {
         ofSetColor(153, 46, 31);
-        ofRect(15, 109, 125, 15);
+        ofRect(15, 210, 125, 15);
     }
     
     
