@@ -39,6 +39,14 @@
 					<Add directory="../../../addons/ofxXmlSettings/libs/" />
 					<Add directory="../../../addons/ofxXmlSettings/src/" />
 				</Compiler>
+				<MakeCommands>
+					<Build command="make Debug" />
+					<CompileFile command="" />
+					<Clean command="make clean" />
+					<DistClean command="$make -f $makefile distclean$target" />
+					<AskRebuildNeeded command="" />
+					<SilentBuild command="make Debug &gt; $(CMD_NULL)" />
+				</MakeCommands>
 			</Target>
 			<Target title="Release x64">
 				<Option output="bin/BrainWaveOSC" prefix_auto="1" extension_auto="1" />
@@ -48,8 +56,8 @@
 				<Option compiler="gcc" />
 				<Option projectCompilerOptionsRelation="1" />
 				<Compiler>
+					<Add option="-Wall" />
 					<Add option="none" />
-					<Add option="-Wall" />
 					<Add directory="src/" />
 					<Add directory="src/BrainWaveGUI/" />
 					<Add directory="../../../addons/ofxOsc/libs/" />
@@ -71,68 +79,14 @@
 					<Add directory="../../../addons/ofxXmlSettings/libs/" />
 					<Add directory="../../../addons/ofxXmlSettings/src/" />
 				</Compiler>
-			</Target>
-			<Target title="BrainWaveOSC-Release">
-				<Option output="bin/BrainWaveOSC" prefix_auto="1" extension_auto="1" />
-				<Option object_output="obj/Release/" />
-				<Option deps_output="bin/" />
-				<Option type="0" />
-				<Option compiler="gcc" />
-				<Compiler>
-					<Add option="-Wall" />
-					<Add directory="src/" />
-					<Add directory="src/BrainWaveGUI/" />
-					<Add directory="../../../addons/ofxOsc/libs/" />
-					<Add directory="../../../addons/ofxOsc/libs/oscpack/" />
-					<Add directory="../../../addons/ofxOsc/libs/oscpack/src/" />
-					<Add directory="../../../addons/ofxOsc/libs/oscpack/src/ip/" />
-					<Add directory="../../../addons/ofxOsc/libs/oscpack/src/ip/posix/" />
-					<Add directory="../../../addons/ofxOsc/libs/oscpack/src/ip/win32/" />
-					<Add directory="../../../addons/ofxOsc/libs/oscpack/src/osc/" />
-					<Add directory="../../../addons/ofxOsc/src/" />
-					<Add directory="../../../addons/ofxThinkgear/libs/" />
-					<Add directory="../../../addons/ofxThinkgear/libs/ThinkGear.bundle/" />
-					<Add directory="../../../addons/ofxThinkgear/libs/ThinkGear.bundle/Contents/" />
-					<Add directory="../../../addons/ofxThinkgear/libs/ThinkGear.bundle/Contents/MacOS/" />
-					<Add directory="../../../addons/ofxThinkgear/libs/ThinkGear.bundle/Contents/Resources/" />
-					<Add directory="../../../addons/ofxThinkgear/libs/ThinkGear.bundle/Contents/Resources/English.lproj/" />
-					<Add directory="../../../addons/ofxThinkgear/src/" />
-					<Add directory="../../../addons/ofxTouchGUI/src/" />
-					<Add directory="../../../addons/ofxXmlSettings/libs/" />
-					<Add directory="../../../addons/ofxXmlSettings/src/" />
-				</Compiler>
-			</Target>
-			<Target title="Debug Win32">
-				<Option output="bin/BrainWaveOSC_debug" prefix_auto="1" extension_auto="1" />
-				<Option object_output="obj/Debug/" />
-				<Option deps_output="bin/" />
-				<Option type="0" />
-				<Option compiler="gcc" />
-				<Compiler>
-					<Add option="-g" />
-					<Add option="-O0" />
-					<Add option="-Wall" />
-					<Add directory="src/" />
-					<Add directory="src/BrainWaveGUI/" />
-					<Add directory="../../../addons/ofxOsc/libs/" />
-					<Add directory="../../../addons/ofxOsc/libs/oscpack/" />
-					<Add directory="../../../addons/ofxOsc/libs/oscpack/src/" />
-					<Add directory="../../../addons/ofxOsc/libs/oscpack/src/ip/" />
-					<Add directory="../../../addons/ofxOsc/libs/oscpack/src/ip/posix/" />
-					<Add directory="../../../addons/ofxOsc/libs/oscpack/src/ip/win32/" />
-					<Add directory="../../../addons/ofxOsc/libs/oscpack/src/osc/" />
-					<Add directory="../../../addons/ofxOsc/src/" />
-					<Add directory="../../../addons/ofxThinkgear/libs/" />
-					<Add directory="../../../addons/ofxThinkgear/libs/ThinkGear.bundle/" />
-					<Add directory="../../../addons/ofxThinkgear/libs/ThinkGear.bundle/Contents/" />
-					<Add directory="../../../addons/ofxThinkgear/libs/ThinkGear.bundle/Contents/MacOS/" />
-					<Add directory="../../../addons/ofxThinkgear/libs/ThinkGear.bundle/Contents/Resources/" />
-					<Add directory="../../../addons/ofxThinkgear/libs/ThinkGear.bundle/Contents/Resources/English.lproj/" />
-					<Add directory="../../../addons/ofxThinkgear/src/" />
-					<Add directory="../../../addons/ofxTouchGUI/src/" />
-					<Add directory="../../../addons/ofxXmlSettings/libs/" />
-					<Add directory="../../../addons/ofxXmlSettings/src/" />
-				</Compiler>
+				<MakeCommands>
+					<Build command="make Release" />
+					<CompileFile command="" />
+					<Clean command="make clean" />
+					<DistClean command="$make -f $makefile distclean$target" />
+					<AskRebuildNeeded command="" />
+					<SilentBuild command="make Release &gt; $(CMD_NULL)" />
+				</MakeCommands>
 			</Target>
 		</Build>
 		<Unit filename="../../../addons/ofxOsc/libs/oscpack/src/ip/IpEndpointName.cpp">

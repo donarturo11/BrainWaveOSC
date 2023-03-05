@@ -2,7 +2,7 @@
 <CodeLite_Project Name="BrainWaveOSC" Version="11000">
   <Plugins>
     <Plugin Name="qmake">
-      <![CDATA[00010001N0011Debug_Win32000000000000]]>
+      <![CDATA[00030001N0011Debug_Win320000000000000001N0009Debug_x640000000000000001N0011Release_x64000000000000]]>
     </Plugin>
   </Plugins>
   <VirtualDirectory Name="include">
@@ -94,67 +94,6 @@
       </Linker>
       <ResourceCompiler Options=""/>
     </GlobalSettings>
-    <Configuration Name="Debug_Win32" CompilerType="GCC" DebuggerType="GNU gdb debugger" Type="Executable" BuildCmpWithGlobalSettings="append" BuildLnkWithGlobalSettings="append" BuildResWithGlobalSettings="append">
-      <Compiler Options="-g -Wall" C_Options="" Assembler="" Required="yes" PreCompiledHeader="" PCHInCommandLine="no" PCHFlags="" PCHFlagsPolicy="0">
-        <IncludePath Value="src"/>
-        <IncludePath Value="src/BrainWaveGUI"/>
-        <IncludePath Value="../../../addons/ofxOsc/libs"/>
-        <IncludePath Value="../../../addons/ofxOsc/libs/oscpack"/>
-        <IncludePath Value="../../../addons/ofxOsc/libs/oscpack/src"/>
-        <IncludePath Value="../../../addons/ofxOsc/libs/oscpack/src/ip"/>
-        <IncludePath Value="../../../addons/ofxOsc/libs/oscpack/src/ip/posix"/>
-        <IncludePath Value="../../../addons/ofxOsc/libs/oscpack/src/ip/win32"/>
-        <IncludePath Value="../../../addons/ofxOsc/libs/oscpack/src/osc"/>
-        <IncludePath Value="../../../addons/ofxOsc/src"/>
-        <IncludePath Value="../../../addons/ofxThinkgear/libs"/>
-        <IncludePath Value="../../../addons/ofxThinkgear/libs/ThinkGear.bundle"/>
-        <IncludePath Value="../../../addons/ofxThinkgear/libs/ThinkGear.bundle/Contents"/>
-        <IncludePath Value="../../../addons/ofxThinkgear/libs/ThinkGear.bundle/Contents/MacOS"/>
-        <IncludePath Value="../../../addons/ofxThinkgear/libs/ThinkGear.bundle/Contents/Resources"/>
-        <IncludePath Value="../../../addons/ofxThinkgear/libs/ThinkGear.bundle/Contents/Resources/English.lproj"/>
-        <IncludePath Value="../../../addons/ofxThinkgear/src"/>
-        <IncludePath Value="../../../addons/ofxTouchGUI/src"/>
-        <IncludePath Value="../../../addons/ofxXmlSettings/libs"/>
-        <IncludePath Value="../../../addons/ofxXmlSettings/src"/>
-      </Compiler>
-      <Linker Options="-O0" Required="yes">
-        <LibraryPath Value="."/>
-        <LibraryPath Value="Debug"/>
-      </Linker>
-      <ResourceCompiler Options="" Required="no"/>
-      <General OutputFile="$(IntermediateDirectory)/$(ProjectName)" IntermediateDirectory="obj/$(VS_Configuration)/" Command="./$(ProjectName)" CommandArguments="" UseSeparateDebugArgs="no" DebugArguments="" WorkingDirectory="./$(IntermediateDirectory)" PauseExecWhenProcTerminates="yes" IsGUIProgram="no" IsEnabled="yes"/>
-      <BuildSystem Name="Default"/>
-      <Environment EnvVarSetName="&lt;Use Defaults&gt;" DbgSetName="&lt;Use Defaults&gt;">
-        <![CDATA[]]>
-      </Environment>
-      <Debugger IsRemote="no" RemoteHostName="" RemoteHostPort="" DebuggerPath="" IsExtended="no">
-        <DebuggerSearchPaths/>
-        <PostConnectCommands/>
-        <StartupCommands/>
-      </Debugger>
-      <PreBuild/>
-      <PostBuild/>
-      <CustomBuild Enabled="yes">
-        <RebuildCommand/>
-        <CleanCommand>make clean</CleanCommand>
-        <BuildCommand>make</BuildCommand>
-        <PreprocessFileCommand/>
-        <SingleFileCommand/>
-        <MakefileGenerationCommand/>
-        <ThirdPartyToolName/>
-        <WorkingDirectory/>
-      </CustomBuild>
-      <AdditionalRules>
-        <CustomPostBuild/>
-        <CustomPreBuild/>
-      </AdditionalRules>
-      <Completion EnableCpp11="no" EnableCpp14="no">
-        <ClangCmpFlagsC/>
-        <ClangCmpFlags/>
-        <ClangPP/>
-        <SearchPaths/>
-      </Completion>
-    </Configuration>
     <Configuration Name="Debug_x64" CompilerType="GCC" DebuggerType="GNU gdb debugger" Type="Executable" BuildCmpWithGlobalSettings="append" BuildLnkWithGlobalSettings="append" BuildResWithGlobalSettings="append">
       <Compiler Options="-g -Wall" C_Options="" Assembler="" Required="yes" PreCompiledHeader="" PCHInCommandLine="no" PCHFlags="" PCHFlagsPolicy="0">
         <IncludePath Value="src"/>
@@ -183,17 +122,9 @@
         <LibraryPath Value="Debug"/>
       </Linker>
       <ResourceCompiler Options="" Required="no"/>
-      <General OutputFile="$(IntermediateDirectory)/$(ProjectName)" IntermediateDirectory="obj/$(VS_Configuration)/" Command="./$(ProjectName)" CommandArguments="" UseSeparateDebugArgs="no" DebugArguments="" WorkingDirectory="./$(IntermediateDirectory)" PauseExecWhenProcTerminates="yes" IsGUIProgram="no" IsEnabled="yes"/>
+      <General OutputFile="$(IntermediateDirectory)/$(ProjectName)_debug" IntermediateDirectory="bin/" Command="./$(ProjectName)_debug" CommandArguments="" UseSeparateDebugArgs="no" DebugArguments="" WorkingDirectory="./$(IntermediateDirectory)" PauseExecWhenProcTerminates="yes" IsGUIProgram="no" IsEnabled="yes"/>
       <BuildSystem Name="Default"/>
-      <Environment EnvVarSetName="&lt;Use Workspace Settings&gt;" DbgSetName="&lt;Use Global Settings&gt;">
-        <![CDATA[VS_Configuration=Debug
-VS_IntDir=obj/$(VS_Configuration)/
-VS_OutDir=bin/
-VS_Platform=x64
-VS_ProjectDir=/home/arch/art/openFrameworks/openFrameworks/apps/BrainWaveOSC/BrainWaveOSC/
-VS_ProjectName=BrainWaveOSC
-VS_SolutionDir=/home/arch/art/openFrameworks/openFrameworks/apps/BrainWaveOSC/BrainWaveOSC/
-]]>
+      <Environment EnvVarSetName="&lt;Use Defaults&gt;" DbgSetName="&lt;Use Defaults&gt;">
       </Environment>
       <Debugger IsRemote="no" RemoteHostName="" RemoteHostPort="" DebuggerPath="" IsExtended="no">
         <DebuggerSearchPaths/>
@@ -202,78 +133,10 @@ VS_SolutionDir=/home/arch/art/openFrameworks/openFrameworks/apps/BrainWaveOSC/Br
       </Debugger>
       <PreBuild/>
       <PostBuild/>
-      <CustomBuild Enabled="no">
+      <CustomBuild Enabled="yes">
         <RebuildCommand/>
-        <CleanCommand/>
-        <BuildCommand/>
-        <PreprocessFileCommand/>
-        <SingleFileCommand/>
-        <MakefileGenerationCommand/>
-        <ThirdPartyToolName/>
-        <WorkingDirectory/>
-      </CustomBuild>
-      <AdditionalRules>
-        <CustomPostBuild/>
-        <CustomPreBuild/>
-      </AdditionalRules>
-      <Completion EnableCpp11="no" EnableCpp14="no">
-        <ClangCmpFlagsC/>
-        <ClangCmpFlags/>
-        <ClangPP/>
-        <SearchPaths/>
-      </Completion>
-    </Configuration>
-    <Configuration Name="Release_Win32" CompilerType="GCC" DebuggerType="GNU gdb debugger" Type="Executable" BuildCmpWithGlobalSettings="append" BuildLnkWithGlobalSettings="append" BuildResWithGlobalSettings="append">
-      <Compiler Options="-g -Wall" C_Options="" Assembler="" Required="yes" PreCompiledHeader="" PCHInCommandLine="no" PCHFlags="" PCHFlagsPolicy="0">
-        <IncludePath Value="src"/>
-        <IncludePath Value="src/BrainWaveGUI"/>
-        <IncludePath Value="../../../addons/ofxOsc/libs"/>
-        <IncludePath Value="../../../addons/ofxOsc/libs/oscpack"/>
-        <IncludePath Value="../../../addons/ofxOsc/libs/oscpack/src"/>
-        <IncludePath Value="../../../addons/ofxOsc/libs/oscpack/src/ip"/>
-        <IncludePath Value="../../../addons/ofxOsc/libs/oscpack/src/ip/posix"/>
-        <IncludePath Value="../../../addons/ofxOsc/libs/oscpack/src/ip/win32"/>
-        <IncludePath Value="../../../addons/ofxOsc/libs/oscpack/src/osc"/>
-        <IncludePath Value="../../../addons/ofxOsc/src"/>
-        <IncludePath Value="../../../addons/ofxThinkgear/libs"/>
-        <IncludePath Value="../../../addons/ofxThinkgear/libs/ThinkGear.bundle"/>
-        <IncludePath Value="../../../addons/ofxThinkgear/libs/ThinkGear.bundle/Contents"/>
-        <IncludePath Value="../../../addons/ofxThinkgear/libs/ThinkGear.bundle/Contents/MacOS"/>
-        <IncludePath Value="../../../addons/ofxThinkgear/libs/ThinkGear.bundle/Contents/Resources"/>
-        <IncludePath Value="../../../addons/ofxThinkgear/libs/ThinkGear.bundle/Contents/Resources/English.lproj"/>
-        <IncludePath Value="../../../addons/ofxThinkgear/src"/>
-        <IncludePath Value="../../../addons/ofxTouchGUI/src"/>
-        <IncludePath Value="../../../addons/ofxXmlSettings/libs"/>
-        <IncludePath Value="../../../addons/ofxXmlSettings/src"/>
-      </Compiler>
-      <Linker Options="-O0" Required="yes">
-        <LibraryPath Value="."/>
-        <LibraryPath Value="Debug"/>
-      </Linker>
-      <ResourceCompiler Options="" Required="no"/>
-      <General OutputFile="$(IntermediateDirectory)/$(ProjectName)" IntermediateDirectory="obj/$(VS_Configuration)/" Command="./$(ProjectName)" CommandArguments="" UseSeparateDebugArgs="no" DebugArguments="" WorkingDirectory="./$(IntermediateDirectory)" PauseExecWhenProcTerminates="yes" IsGUIProgram="no" IsEnabled="yes"/>
-      <BuildSystem Name="Default"/>
-      <Environment EnvVarSetName="&lt;Use Workspace Settings&gt;" DbgSetName="&lt;Use Global Settings&gt;">
-        <![CDATA[VS_Configuration=Release
-VS_IntDir=obj/$(VS_Configuration)/
-VS_OutDir=bin/
-VS_Platform=Win32
-VS_ProjectDir=/home/arch/art/openFrameworks/openFrameworks/apps/BrainWaveOSC/BrainWaveOSC/
-VS_ProjectName=BrainWaveOSC
-VS_SolutionDir=/home/arch/art/openFrameworks/openFrameworks/apps/BrainWaveOSC/BrainWaveOSC/
-]]>
-      </Environment>
-      <Debugger IsRemote="no" RemoteHostName="" RemoteHostPort="" DebuggerPath="" IsExtended="no">
-        <DebuggerSearchPaths/>
-        <PostConnectCommands/>
-        <StartupCommands/>
-      </Debugger>
-      <PreBuild/>
-      <PostBuild/>
-      <CustomBuild Enabled="no">
-        <RebuildCommand/>
-        <CleanCommand/>
-        <BuildCommand/>
+        <CleanCommand>make clean</CleanCommand>
+        <BuildCommand>make Debug</BuildCommand>
         <PreprocessFileCommand/>
         <SingleFileCommand/>
         <MakefileGenerationCommand/>
@@ -319,17 +182,9 @@ VS_SolutionDir=/home/arch/art/openFrameworks/openFrameworks/apps/BrainWaveOSC/Br
         <LibraryPath Value="Debug"/>
       </Linker>
       <ResourceCompiler Options="" Required="no"/>
-      <General OutputFile="$(IntermediateDirectory)/$(ProjectName)" IntermediateDirectory="obj/$(VS_Configuration)/" Command="./$(ProjectName)" CommandArguments="" UseSeparateDebugArgs="no" DebugArguments="" WorkingDirectory="./$(IntermediateDirectory)" PauseExecWhenProcTerminates="yes" IsGUIProgram="no" IsEnabled="yes"/>
+      <General OutputFile="$(IntermediateDirectory)/$(ProjectName)" IntermediateDirectory="bin/" Command="./$(ProjectName)" CommandArguments="" UseSeparateDebugArgs="no" DebugArguments="" WorkingDirectory="./$(IntermediateDirectory)" PauseExecWhenProcTerminates="yes" IsGUIProgram="no" IsEnabled="yes"/>
       <BuildSystem Name="Default"/>
-      <Environment EnvVarSetName="&lt;Use Workspace Settings&gt;" DbgSetName="&lt;Use Global Settings&gt;">
-        <![CDATA[VS_Configuration=Release
-VS_IntDir=obj/$(VS_Configuration)/
-VS_OutDir=bin/
-VS_Platform=x64
-VS_ProjectDir=/home/arch/art/openFrameworks/openFrameworks/apps/BrainWaveOSC/BrainWaveOSC/
-VS_ProjectName=BrainWaveOSC
-VS_SolutionDir=/home/arch/art/openFrameworks/openFrameworks/apps/BrainWaveOSC/BrainWaveOSC/
-]]>
+      <Environment EnvVarSetName="&lt;Use Defaults&gt;" DbgSetName="&lt;Use Defaults&gt;">
       </Environment>
       <Debugger IsRemote="no" RemoteHostName="" RemoteHostPort="" DebuggerPath="" IsExtended="no">
         <DebuggerSearchPaths/>
@@ -338,10 +193,10 @@ VS_SolutionDir=/home/arch/art/openFrameworks/openFrameworks/apps/BrainWaveOSC/Br
       </Debugger>
       <PreBuild/>
       <PostBuild/>
-      <CustomBuild Enabled="no">
+      <CustomBuild Enabled="yes">
         <RebuildCommand/>
-        <CleanCommand/>
-        <BuildCommand/>
+        <CleanCommand>make clean</CleanCommand>
+        <BuildCommand>make Release</BuildCommand>
         <PreprocessFileCommand/>
         <SingleFileCommand/>
         <MakefileGenerationCommand/>

@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CodeLite_Workspace Name="BrainWaveOSC" Database="" Version="10000">
   <Project Name="BrainWaveOSC" Path="BrainWaveOSC.project" Active="Yes"/>
-  <Project Name="openframeworksLib" Path="../../../libs/openFrameworksCompiled/project/vs/openframeworksLib.project"/>
+  <Project Name="openframeworksLib" Path="../../../libs/openFrameworksCompiled/project/vs/openframeworksLib.project" Active="No"/>
   <BuildMatrix>
     <WorkspaceConfiguration Name="Debug">
       <Environment/>
-      <Project Name="BrainWaveOSC" ConfigName="Debug_Win32"/>
       <Project Name="BrainWaveOSC" ConfigName="Debug_x64"/>
+      <Project Name="openframeworksLib" ConfigName=""/>
     </WorkspaceConfiguration>
     <WorkspaceConfiguration Name="Release">
       <Environment/>
-      <Project Name="BrainWaveOSC" ConfigName="Release_Win32"/>
       <Project Name="BrainWaveOSC" ConfigName="Release_x64"/>
+      <Project Name="openframeworksLib" ConfigName=""/>
     </WorkspaceConfiguration>
   </BuildMatrix>
 </CodeLite_Workspace>
