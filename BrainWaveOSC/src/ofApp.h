@@ -83,7 +83,12 @@ public:
     EegFrequencyGraph* frequencyGraph;
     ofxTouchGUISlider* timeline;
     vector<EegTimeGraph*> eegSet;
-    
+    ofxTouchGUIDropDown* deviceChooser;
+    ofxTouchGUIDropDown* baudrateChooser;
+    ofxTouchGUIButton* refreshButton;
+    ofxTouchGUIButton* disconnectButton;
+    ofxTouchGUIButton* connectButton;
+        
     bool normaliseMaxToCurrentSet;
 
     float startTime;
@@ -107,9 +112,20 @@ public:
     int receivePort;
     
     // mindplay brainband bluetooth device
+    void updateDeviceInfo();
+    void refreshDevices();
+    void setupDevice(int id);
+    void setupBaudrate(int id);
+    void connectDevice();
+    void disconnectDevice();
+    bool deviceIsConnected = false;
     ofxThinkgear tg;
     ofxThinkgearEventArgs data;
     string deviceName;
+    string deviceInfoString;
+
+    vector<string> devicesList;
+    vector<string> baudrateList;
     int deviceBaudRate;
     
     // custom eeg data struct to capture all the data from thinkgear events

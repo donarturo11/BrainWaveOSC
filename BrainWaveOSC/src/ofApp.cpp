@@ -71,16 +71,33 @@ void ofApp::setup(){
     
     normaliseMaxToCurrentSet = false;    
     
+    setupGui();
+    refreshDevices();
+    updateDeviceInfo();
     // default device settings  // TODO automatize setup
-    deviceName = "/dev/tty.BrainBand-DevB"; // osx address, windows is com6 or something
+    if (devicesList.empty()) {
+        #if defined(TARGET_OSX)
+        deviceName = "/dev/tty.BrainBand-DevB";
+        #elif defined(TARGET_LINUX)
+        deviceName = "/dev/rfcomm0";
+        #elif defined(TARGET_WIN32)
+        deviceName = "COM6";
+        #endif
+    } else {
+        deviceName = devicesList[0];
+    }
+    
     deviceBaudRate = 57600;
+    
+    ofLog() << "Initial values: \n" 
+            << "Device name: " << deviceName << "\n"
+            << "Baudrate: " << deviceBaudRate << "\n";
     
     // osc settings
     host = "127.0.0.1"; // change via xml
     port = 7771; // change via xml
     receivePort=7772; // change via xml
     
-    setupGui();      
     
     // setup thinkgear hardware using serial streamer or comms driver (osx only tested).
     // TG_STREAM_PARSER is default
@@ -115,10 +132,10 @@ void ofApp::setupGui() {
     settings.loadFonts("fonts/stan0755.ttf", "fonts/abel.ttf", 6, 20);
     
     // constants can only be changed via xml
-    settings.setConstant("device", &deviceName);
-    settings.setConstant("baud", &deviceBaudRate);
-    settings.setConstant("host", &host);
-    settings.setConstant("port", &port);
+    settings.setVariable("device", &deviceName);
+    settings.setVariable("baud", &deviceBaudRate);
+    settings.setVariable("host", &host);
+    settings.setVariable("port", &port);
     settings.setConstant("receive port", &receivePort);
     settings.setConstant("launch with small window", &smallWindow);
     
@@ -134,11 +151,27 @@ void ofApp::setupGui() {
 
     // add items
     settings.setItemSize(bigWidth, bigHeight);
+    //
     settings.addTitleText("BRAINWAVE OSC " + ofToString(_VER), 18, 18);
-    settings.addText("Device - " + deviceName + ". BaudRate - " + ofToString(deviceBaudRate), 20, 55);
-    settings.addText("OSC - " + host + ":" + ofToString(port), 20, 70);
-    settings.addText("---------------------------------------------------------------------------------------------", 20, 85);
+    updateDeviceInfo();
+    settings.addVarText("", &deviceInfoString, 20, 55);
+    //settings.addText("Device - " + deviceName + ". BaudRate - " + ofToString(deviceBaudRate), 20, 55);
+    //settings.addText("OSC - " + host + ":" + ofToString(port), 20, 70);
+    //settings.addText("---------------------------------------------------------------------------------------------", 20, 85);
+    //
+    // add device chooser
+    //settings.addDropDown("Device", devices.size(), devices, 18, 80, 18, 20 );
+    deviceChooser = settings.addDropDown("Devices", 1, 0, {"device"}, 18, 100, 300, 20 );
+    baudrateChooser = settings.addDropDown("Baudrate", 1, 0, {"baudrate"}, 350, 100, 100, 20 );
+    connectButton = settings.addButton("Connect", 18, 130, 60, 20);
+    disconnectButton = settings.addButton("Disconnect", 88, 130, 60, 20);
+    refreshButton = settings.addButton("Refresh", 258, 130, 60, 20);
     
+    ofAddListener(connectButton->onChangedEvent, this, &ofApp::onGUIChanged);
+    ofAddListener(disconnectButton->onChangedEvent, this, &ofApp::onGUIChanged);
+    ofAddListener(refreshButton->onChangedEvent, this, &ofApp::onGUIChanged);
+    ofAddListener(deviceChooser->onChangedEvent, this, &ofApp::onGUIChanged);
+    ofAddListener(baudrateChooser->onChangedEvent, this, &ofApp::onGUIChanged);
     // poor signal, attention, meditation
     int graphWidth = 470;
     int graphHeight = 60;
@@ -306,7 +339,7 @@ void ofApp::onGUIChanged(ofxTouchGUIEventArgs& args) {
     ofxTouchGUIBase* target = args.target;
     string buttonLabel = target->getLabel();
 
-    
+    ofLog() << buttonLabel << " pressed.";
     // or just use the label as the identifier
     if(buttonLabel == "SAVE") {
         settings.saveSettings();
@@ -416,6 +449,22 @@ void ofApp::onGUIChanged(ofxTouchGUIEventArgs& args) {
         }
     }
     
+    else if(buttonLabel == "Refresh") { 
+        refreshDevices();
+    }
+    else if(buttonLabel == "Connect") { 
+        connectDevice();
+    }
+    else if(buttonLabel == "Disconnect") { 
+        disconnectDevice();
+    }
+    else if(buttonLabel == "Devices") { 
+        setupDevice(deviceChooser->getValue());
+    }
+    else if(buttonLabel == "Baudrate") { 
+        setupBaudrate(baudrateChooser->getValue());
+    }
+    
 }
 
 void ofApp::loadPlaybackFile(string path) {
@@ -475,7 +524,7 @@ void ofApp::update(){
     }*/
     
     if(!playbackMode) {
-        tg.update();
+        if (deviceIsConnected) tg.update();
         
         float totalActivity = allData.getTotalActivity();
         
@@ -658,6 +707,68 @@ void ofApp::update(){
     //ofLog() << globalMax;
 }
 
+void ofApp::updateDeviceInfo(){
+    
+    stringstream text;
+    text << "Device - " << deviceName << " . BaudRate - " << deviceBaudRate<< "\n";
+    text << "OSC - " << host << ":" << port << "\n";
+    text << "---------------------------------------------------------------------------------------------\n";
+    deviceInfoString = text.str();
+    settings.drawText(deviceInfoString, 20, 55);
+    ofLog() << "Device info: \n" << deviceInfoString;
+    
+}
+
+void ofApp::refreshDevices(){
+    auto device = tg.device;
+    auto allDevices = device->getDeviceList();
+    devicesList.clear();
+    baudrateList.clear();
+    
+    for (auto br : ThinkgearBaudrates)
+        baudrateList.push_back(ofToString(br));
+    if (baudrateChooser)
+        baudrateChooser->setValues(baudrateList.size(), baudrateList);
+    
+    for (auto info : allDevices){
+        ofLog() << info.getDevicePath();
+        devicesList.push_back(info.getDevicePath());
+    }
+    
+    if (deviceChooser)
+        deviceChooser->setValues(devicesList.size(), devicesList);
+    updateDeviceInfo();
+}
+// bool saveControl(string currentType, string currentLabel, T* currentValue, bool overwriteXMLValue = false);
+void ofApp::connectDevice(){
+    tg.isReady = false;
+    //tg.open();
+    tg.setup(deviceName, deviceBaudRate, TG_STREAM_PARSER);
+    deviceIsConnected = true;
+}
+
+void ofApp::disconnectDevice(){
+    deviceIsConnected = false;
+    //tg.removeEventListener(this);
+    tg.isReady = false;
+    //tg.close();
+    //update();
+}
+
+void ofApp::setupDevice(int id){
+    deviceName = devicesList[id];
+    settings.saveControl("variable", "device", &deviceName, true);
+    settings.saveSettings();
+    updateDeviceInfo();
+}
+
+void ofApp::setupBaudrate(int id){
+    deviceBaudRate = ThinkgearBaudrates[id];
+    settings.saveControl("variable", "baud", &deviceBaudRate, true);
+    settings.saveSettings();
+    updateDeviceInfo();
+}
+
 //float attSmooth = 0;
 //--------------------------------------------------------------
 void ofApp::draw(){
@@ -689,11 +800,11 @@ void ofApp::draw(){
     if(allData.signal == 0) {
         //ofSetColor(115, 180, 122);
         ofSetColor(97, 178, 106);
-        ofRect(15, 210, 115, 15);
+        ofRect(15, 160, 115, 15);
         
     } else {
         ofSetColor(153, 46, 31);
-        ofRect(15, 210, 125, 15);
+        ofRect(15, 160, 125, 15);
     }
     
     
@@ -719,7 +830,7 @@ void ofApp::draw(){
         
         
         stringstream text;
-        text << "Device - " << deviceName << ":" << deviceBaudRate << "\n"
+        text << deviceInfoString << "\n"
         << "OSC - " << host << ":" << port << "\n"
         << "Signal - " << allData.signal << "\n"
         << "Attention - " << allData.attention;

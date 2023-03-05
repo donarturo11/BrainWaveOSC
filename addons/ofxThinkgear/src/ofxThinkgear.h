@@ -4,6 +4,10 @@
 #include "ThinkGearStreamParser.h"
 #include "ThinkgearCommsDriver.h"
 
+const int ThinkgearBaudrates[] {
+    1200, 2400, 4800, 9600, 57600, 115200
+};
+
 /*
  ofxThinkgear
  - Original addon by Laurent Bedubourg <laurent@labe.me> https://github.com/labe-me/ofxThinkgear

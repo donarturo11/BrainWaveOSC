@@ -187,6 +187,12 @@ void ofxThinkgear::setup(string deviceName, int baudRate, ThinkGearImplementatio
     }
 }
 
+bool ofxThinkgear::open(){
+    isReady = false;
+    device = new ofSerial();
+    return true;
+}
+
 void ofxThinkgear::close(){
     
     if(connectionType == TG_STREAM_PARSER) {
