@@ -177,12 +177,16 @@ jobs:
       if: ${{runner.os == 'Windows'}}
       run: |
           cd ${BUILD_DIR}/bin
-          7z a -r ${DESTDIR}/${PACKAGE_NAME}.7z *
+          cp -Rv ${PROJECT_DIR}/examples ${BUILD_DIR}/bin
+          cd ${BUILD_DIR}/
+          mv bin ${{env.pkgname}}
+          7z a -r ${DESTDIR}/${PACKAGE_NAME}.7z ${{env.pkgname}}
 
     - name: Prepare binaries to upload (Linux)
       if: ${{runner.os == 'Linux'}}
       run: |
           cd ${BUILD_DIR}/
+          cp -Rv ${PROJECT_DIR}/examples bin/
           mv bin ${PACKAGE_NAME}
           tar -vczf $DESTDIR/${PACKAGE_NAME} ${PACKAGE_NAME}
 
@@ -193,6 +197,7 @@ jobs:
           hdiutil attach temp.dmg
           TEMPDMG=${PWD}/temp.dmg
           cd ${BUILD_DIR}/bin
+          cp -Rv ${PROJECT_DIR}/examples ${PACKAGE_NAME}.app/Contents/Resources/
           codesign --verbose --strict --continue --timestamp --force --deep -s ${IDENTITY_NAME} *.app
           cp -av * /Volumes/${PACKAGE_NAME}
           ln -s /Applications/ /Volumes/${PACKAGE_NAME}/Applications
