@@ -200,10 +200,9 @@ jobs:
           hdiutil attach temp.dmg
           TEMPDMG=${PWD}/temp.dmg
           cd ${BUILD_DIR}/bin
-          mkdir -p ${PACKAGE_NAME}.app/Contents/Resources/
-          cp -Rv ${PROJECT_DIR}/examples bin
           codesign --verbose --strict --continue --timestamp --force --deep -s ${IDENTITY_NAME} *.app
           cp -av * /Volumes/${PACKAGE_NAME}
+          cp -Rv ${PROJECT_DIR}/examples /Volumes/${PACKAGE_NAME}
           ln -s /Applications/ /Volumes/${PACKAGE_NAME}/Applications
           hdiutil detach /Volumes/${PACKAGE_NAME}
           mkdir ${DESTDIR} || echo "::warning:: ${DESTDIR} already exists"
