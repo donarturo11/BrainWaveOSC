@@ -180,7 +180,10 @@ jobs:
           cp -Rv ${PROJECT_DIR}/examples ${BUILD_DIR}/bin
           cd ${BUILD_DIR}/
           mv bin ${{env.pkgname}}
-          7z a -r ${DESTDIR}/${PACKAGE_NAME}.7z ${{env.pkgname}}
+          7z a -r ${DESTDIR}/${PACKAGE_NAME}-portable.7z ${{env.pkgname}}
+          cp ${OF_ROOT}/libs/openFrameworksCompiled/project/vs/icon.ico ${{env.pkgname}}/
+          makensis ${{env.pkgname}}.nsi
+          mv ${{env.pkgname}}-installer.exe ${DESTDIR}/
 
     - name: Prepare binaries to upload (Linux)
       if: ${{runner.os == 'Linux'}}
