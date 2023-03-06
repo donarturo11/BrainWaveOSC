@@ -72,6 +72,7 @@ jobs:
            pacman -S --noconfirm \
                ${MINGW_PACKAGE_PREFIX}-toolchain \
                ${MINGW_PACKAGE_PREFIX}-gcc-objc \
+               ${MINGW_PACKAGE_PREFIX}-nsis \
                ${MINGW_PACKAGE_PREFIX}-glew
 
     - name: Configure environment
