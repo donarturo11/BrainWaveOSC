@@ -196,7 +196,7 @@ jobs:
           cd ${BUILD_DIR}/
           cp -Rv ${PROJECT_DIR}/examples bin/
           mv bin ${PACKAGE_NAME}
-          tar -vczf $DESTDIR/${PACKAGE_NAME} ${PACKAGE_NAME}
+          tar -vczf $DESTDIR/${PACKAGE_NAME}.tar.gz ${PACKAGE_NAME}
 
     - name: Prepare binaries to upload (MacOS)
       if: ${{runner.os == 'macOS'}}
