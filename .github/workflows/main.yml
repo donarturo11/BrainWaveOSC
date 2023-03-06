@@ -188,7 +188,7 @@ jobs:
           7z a -r ${DESTDIR}/${PACKAGE_NAME}-portable.7z ${{env.pkgname}}
           cp ${OF_ROOT}/libs/openFrameworksCompiled/project/vs/icon.ico ${{env.pkgname}}/
           makensis ${{env.pkgname}}.nsi
-          mv ${{env.pkgname}}-installer.exe ${DESTDIR}/
+          mv ${{env.pkgname}}-win-installer.exe ${DESTDIR}/
 
     - name: Prepare binaries to upload (Linux)
       if: ${{runner.os == 'Linux'}}
