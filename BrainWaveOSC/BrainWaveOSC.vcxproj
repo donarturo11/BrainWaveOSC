@@ -173,9 +173,9 @@
   <ItemGroup>
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\ofApp.cpp" />
-    <ClCompile Include="src\BrainWaveGUI\EegFrequencyGraph.mm" />
-    <ClCompile Include="src\BrainWaveGUI\EegTimeGraph.mm" />
-    <ClCompile Include="src\BrainWaveGUI\BrainWaveGUI.mm" />
+    <ClCompile Include="src\BrainWaveGUI\EegFrequencyGraph.cpp" />
+    <ClCompile Include="src\BrainWaveGUI\EegTimeGraph.cpp" />
+    <ClCompile Include="src\BrainWaveGUI\BrainWaveGUI.cpp" />
     <ClCompile Include="..\..\..\addons\ofxOsc\src\ofxOscParameterSync.cpp" />
     <ClCompile Include="..\..\..\addons\ofxOsc\src\ofxOscMessage.cpp" />
     <ClCompile Include="..\..\..\addons\ofxOsc\src\ofxOscBundle.cpp" />
@@ -191,15 +191,15 @@
     <ClCompile Include="..\..\..\addons\ofxThinkgear\src\ofxThinkgear.cpp" />
     <ClCompile Include="..\..\..\addons\ofxThinkgear\src\ThinkgearCommsDriver.cpp" />
     <ClCompile Include="..\..\..\addons\ofxThinkgear\src\ThinkGearStreamParser.c" />
-    <ClCompile Include="..\..\..\addons\ofxTouchGUI\src\ofxTouchGUIBase.mm" />
-    <ClCompile Include="..\..\..\addons\ofxTouchGUI\src\ofxTouchGUI.mm" />
-    <ClCompile Include="..\..\..\addons\ofxTouchGUI\src\ofxTouchGUIText.mm" />
-    <ClCompile Include="..\..\..\addons\ofxTouchGUI\src\ofxTouchGUIDropDown.mm" />
-    <ClCompile Include="..\..\..\addons\ofxTouchGUI\src\ofxTouchGUISlider.mm" />
-    <ClCompile Include="..\..\..\addons\ofxTouchGUI\src\ofxTouchGUITextInput.mm" />
-    <ClCompile Include="..\..\..\addons\ofxTouchGUI\src\ofxTouchGUIButton.mm" />
-    <ClCompile Include="..\..\..\addons\ofxTouchGUI\src\ofxTouchGUIDataGraph.mm" />
-    <ClCompile Include="..\..\..\addons\ofxTouchGUI\src\ofxTouchGUIToggleButton.mm" />
+    <ClCompile Include="..\..\..\addons\ofxTouchGUI\src\ofxTouchGUIBase.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxTouchGUI\src\ofxTouchGUI.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxTouchGUI\src\ofxTouchGUIText.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxTouchGUI\src\ofxTouchGUIDropDown.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxTouchGUI\src\ofxTouchGUISlider.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxTouchGUI\src\ofxTouchGUITextInput.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxTouchGUI\src\ofxTouchGUIButton.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxTouchGUI\src\ofxTouchGUIDataGraph.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxTouchGUI\src\ofxTouchGUIToggleButton.cpp" />
     <ClCompile Include="..\..\..\addons\ofxXmlSettings\src\ofxXmlSettings.cpp" />
     <ClCompile Include="..\..\..\addons\ofxXmlSettings\libs\tinyxmlparser.cpp" />
     <ClCompile Include="..\..\..\addons\ofxXmlSettings\libs\tinyxmlerror.cpp" />
