@@ -88,6 +88,8 @@ public:
     ofxTouchGUIButton* refreshButton;
     ofxTouchGUIButton* disconnectButton;
     ofxTouchGUIButton* connectButton;
+    ofxTouchGUIToggleButton* rawDataEventsToggle;
+    ofxTouchGUIToggleButton* oscEveryFrameToggle;
         
     bool normaliseMaxToCurrentSet;
 

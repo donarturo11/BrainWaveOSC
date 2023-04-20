@@ -209,10 +209,12 @@ void ofApp::setupGui() {
     
     settings.setItemSize(smallWidth, bigHeight);
     ofVec2f lastPos = settings.getItemPosition();
-    settings.addToggleButton("SEND RAW DATA WITH OSC", &tg.allowRawDataEvents, lastPos.x, lastPos.y + graphHeight + 10);
+    rawDataEventsToggle = settings.addToggleButton("SEND RAW DATA WITH OSC", &tg.allowRawDataEvents, lastPos.x, lastPos.y + graphHeight + 10);
+    ofAddListener(rawDataEventsToggle->onChangedEvent, this, &ofApp::onGUIChanged);
     
     lastPos = settings.getItemPosition();
-    settings.addToggleButton("SEND OSC EVERY FRAME", &sendOscEveryFrame, lastPos.x + settings.getItemWidth() + 20, lastPos.y);
+    oscEveryFrameToggle = settings.addToggleButton("SEND OSC EVERY FRAME", &sendOscEveryFrame, lastPos.x + settings.getItemWidth() + 20, lastPos.y);
+    ofAddListener(oscEveryFrameToggle->onChangedEvent, this, &ofApp::onGUIChanged);
     
     
     // moving the settings position cursor
@@ -449,7 +451,14 @@ void ofApp::onGUIChanged(ofxTouchGUIEventArgs& args) {
             ofLog() << "finished saving!";
         }
     }
-    
+    else if (buttonLabel == "SEND RAW DATA WITH OSC") {
+        settings.saveControl("variable", "SEND RAW DATA WITH OSC", &(tg.allowRawDataEvents), true);
+        settings.saveSettings();
+    }
+    else if (buttonLabel == "SEND OSC EVERY FRAME") {
+        settings.saveControl("variable", "SEND OSC EVERY FRAME", &sendOscEveryFrame, true);
+        settings.saveSettings();
+    }
     else if(buttonLabel == "Refresh") { 
         refreshDevices();
     }
@@ -1003,16 +1012,6 @@ void ofApp::onThinkgearEeg(ofxThinkgearEventArgs& args){
     allData.eegHighBeta = args.eegHighBeta;
     allData.eegLowGamma = args.eegLowGamma;
     allData.eegHighGamma = args.eegHighGamma;
-    
-    settings.sendOSC("/activity", allData.getTotalActivity());
-    eegDeltaGraph->sendOSC(allData.eegDelta);
-    eegThetaGraph->sendOSC(allData.eegTheta);
-    eegLowAlphaGraph->sendOSC(allData.eegLowAlpha);
-    eegHighAlphaGraph->sendOSC(allData.eegHighAlpha);
-    eegLowBetaGraph->sendOSC(allData.eegLowBeta);
-    eegHighBetaGraph->sendOSC(allData.eegHighBeta);
-    eegLowGammaGraph->sendOSC(allData.eegLowGamma);
-    eegHighGammaGraph->sendOSC(allData.eegHighGamma);
 }
 
 void ofApp::onThinkgearConnecting(ofxThinkgearEventArgs& args){
