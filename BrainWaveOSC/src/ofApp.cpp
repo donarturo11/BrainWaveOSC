@@ -749,10 +749,9 @@ void ofApp::connectDevice(){
 
 void ofApp::disconnectDevice(){
     deviceIsConnected = false;
-    //tg.removeEventListener(this);
+    tg.device->flush();
+    tg.device->close();
     tg.isReady = false;
-    //tg.close();
-    //update();
 }
 
 void ofApp::setupDevice(int id){
