@@ -75,6 +75,7 @@ void ofApp::setup(){
     refreshDevices();
     updateDeviceInfo();
     // default device settings  // TODO automatize setup
+    /*
     if (devicesList.empty()) {
         #if defined(TARGET_OSX)
         deviceName = "/dev/tty.BrainBand-DevB";
@@ -88,7 +89,7 @@ void ofApp::setup(){
     }
     
     deviceBaudRate = 57600;
-    
+    */
     ofLog() << "Initial values: \n" 
             << "Device name: " << deviceName << "\n"
             << "Baudrate: " << deviceBaudRate << "\n";
