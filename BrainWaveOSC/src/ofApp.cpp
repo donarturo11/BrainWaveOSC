@@ -394,21 +394,12 @@ void ofApp::onGUIChanged(ofxTouchGUIEventArgs& args) {
         allData.eegTheta = 0;
         allData.elapsed = 0;
         //EegTimeGraph::dynamicEegMaxValues.clear();
-        
+
         if(playbackMode) {
-            
-            // close device            
-            tg.close();
-            tg.removeEventListener(this);
-            tg.isReady = false;
-            
+            disconnectDevice();
             loadPlaybackFile("export/test.csv");
-        } else {
-            tg.addEventListener(this);
-            tg.flush();//close();            
-            
         }
-        
+
         // reset all the graphs
         EegTimeGraph::dynamicEegMax = 1;
         //poorSignalGraph->reset();
