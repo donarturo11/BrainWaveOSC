@@ -205,7 +205,7 @@ jobs:
           hdiutil attach temp.dmg
           TEMPDMG=${PWD}/temp.dmg
           cd ${BUILD_DIR}/bin
-          codesign --verbose --strict --continue --timestamp --force --deep -s ${IDENTITY_NAME} *.app
+          codesign --verbose --entitlements ${BUILD_DIR}/entitlements.plist --strict --continue --timestamp --force --deep -s ${IDENTITY_NAME} *.app
           cp -av * /Volumes/${PACKAGE_NAME}
           cp -Rv ${PROJECT_DIR}/examples /Volumes/${PACKAGE_NAME}
           ln -s /Applications/ /Volumes/${PACKAGE_NAME}/Applications
