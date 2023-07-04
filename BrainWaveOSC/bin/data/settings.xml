@@ -1,28 +1,99 @@
 <settings>
+    <control>
+        <type>constant</type>
+        <label>device</label>
+        <value>COM6</value>
+    </control>
+    <control>
+        <type>constant</type>
+        <label>baud</label>
+        <value>57600</value>
+    </control>
+    <control>
+        <type>constant</type>
+        <label>host</label>
+        <value>127.0.0.1</value>
+    </control>
+    <control>
+        <type>constant</type>
+        <label>port</label>
+        <value>7771</value>
+    </control>
+    <control>
+        <type>constant</type>
+        <label>receive port</label>
+        <value>7772</value>
+    </control>
+    <control>
+        <type>constant</type>
+        <label>launch with small window</label>
+        <value>0</value>
+    </control>
+    <control>
+        <type>toggle</type>
+        <label>SEND RAW DATA WITH OSC</label>
+        <value>0</value>
+    </control>
+    <control>
+        <type>toggle</type>
+        <label>SEND OSC EVERY FRAME</label>
+        <value>1</value>
+    </control>
+    <control>
+        <type>toggle</type>
+        <label>USE GLOBAL EEG RANGES</label>
+        <value>1</value>
+    </control>
+    <control>
+        <type>variable</type>
+        <label>Poor Signal 0-200</label>
+        <value>200.000000000</value>
+    </control>
+    <control>
+        <type>toggle</type>
+        <label>PLAYBACK MODE (test.csv)</label>
+        <value>0</value>
+    </control>
+    <control>
+        <type>toggle</type>
+        <label>PAUSE PLAYBACK</label>
+        <value>0</value>
+    </control>
+    <control>
+        <type>slider</type>
+        <label>PLAYBACK TIMELINE</label>
+        <value>0</value>
+    </control>
+    <control>
+        <type>toggle</type>
+        <label>RECORD TO CSV</label>
+        <value>0</value>
+    </control>
+</settings>
 <control>
-    <type>constant</type>
+    <type>variable</type>
     <label>device</label>
-    <value>COM6</value>
+    <value>/dev/tnt0</value>
 </control>
 <control>
-    <type>constant</type>
+    <type>variable</type>
     <label>baud</label>
     <value>57600</value>
 </control>
 <control>
-    <type>constant</type>
+    <type>variable</type>
     <label>host</label>
     <value>127.0.0.1</value>
 </control>
 <control>
-    <type>constant</type>
+    <type>variable</type>
     <label>port</label>
     <value>7771</value>
 </control>
 <control>
     <type>constant</type>
     <label>receive port</label>
-    <value>7772</value>
+    <value>0</value>
 </control>
 <control>
     <type>constant</type>
@@ -30,9 +101,29 @@
     <value>0</value>
 </control>
 <control>
+    <type>variable</type>
+    <label />
+    <value>Device - /dev/tnt0 . BaudRate - 57600&#x0A;OSC - 127.0.0.1:7771&#x0A;---------------------------------------------------------------------------------------------&#x0A;</value>
+</control>
+<control>
+    <type>dropdown</type>
+    <label>Devices</label>
+    <value>0</value>
+</control>
+<control>
+    <type>dropdown</type>
+    <label>Baudrate</label>
+    <value>4</value>
+</control>
+<control>
+    <type>variable</type>
+    <label>Poor Signal 0-200</label>
+    <value>200.000000000</value>
+</control>
+<control>
     <type>toggle</type>
     <label>SEND RAW DATA WITH OSC</label>
-    <value>0</value>
+    <value>1</value>
 </control>
 <control>
     <type>toggle</type>
@@ -43,11 +134,6 @@
     <type>toggle</type>
     <label>USE GLOBAL EEG RANGES</label>
     <value>1</value>
-</control>
-<control>
-    <type>variable</type>
-    <label>Poor Signal 0-200</label>
-    <value>200.000000000</value>
 </control>
 <control>
     <type>toggle</type>
@@ -69,4 +155,13 @@
     <label>RECORD TO CSV</label>
     <value>0</value>
 </control>
-</settings>
+<control>
+    <type>variable</type>
+    <label>SEND RAW DATA WITH OSC</label>
+    <value>1</value>
+</control>
+<control>
+    <type>variable</type>
+    <label>SEND OSC EVERY FRAME</label>
+    <value>1</value>
+</control>
